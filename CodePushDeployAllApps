@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# to run, type './CodePushDeployAllApps' in terminal
+# don't forget to update the release description!
+echo
+echo
+echo
+echo
+echo *~*~*~*DEPLOYING iTour APPS*~*~*~*
+starttime_total=$(date +%s)
+## declare an array of band names for processing
+## add PEARLJAM once that app has been released!
+declare -a bands=("DEAD" "DMB" "PHISH" "RADIOHEAD" "SCI" "UMPHREYS" "WSP")
+
+## now loop through the bands array
+for band in "${bands[@]}"
+do
+   echo
+   echo "$band" START PROCESSING: $(date)
+   starttime_band=$(date +%s)
+
+   ## copy the band's params file to the app
+   cp ../iTour_data_files/params/"params $band.js" ./helpers/params.js
+   echo "$band" params file copied to ./iTour/helpers/params.js
+
+   ## convert $band from UPPER to lower for app name
+   lowerBand=$(echo "$band" | tr '[:upper:]' '[:lower:]')
+   appName=$(echo iTour."$lowerBand")
+
+   ## release and when done promote android app
+   echo
+   echo "$appName"-Android start
+   starttime_platform=$(date +%s)
+##   code-push deployment ls "$appName"-Android
+   code-push deployment ls "$appName"-Android && code-push release-react "$appName"-Android android --mandatory true --description "Fix Places URL and make some text not scalable" --targetBinaryVersion "7.0.0 - 7.0.1" && echo "....android released" && code-push deployment ls "$appName"-Android && code-push promote "$appName"-Android Staging Production && echo "....android promoted" && code-push deployment ls "$appName"-Android
+   endttime_platform=$(date +%s)
+   echo "$appName"-Android completed in "$(($endttime_platform - $starttime_platform))" seconds
+
+   ## release and when done promote iOS app
+   echo
+   echo "$appName"-iOS start
+   starttime_platform=$(date +%s)
+##   code-push deployment ls "$appName"-iOS
+   code-push deployment ls "$appName"-iOS && code-push release-react "$appName"-iOS ios --mandatory true --description "Fix Places URL and make some text not scalable" --targetBinaryVersion "7.0.0 - 7.0.1" && echo "....iOS released" && code-push deployment ls "$appName"-iOS && code-push promote "$appName"-iOS Staging Production && echo "....iOS promoted" && code-push deployment ls "$appName"-iOS
+   endttime_platform=$(date +%s)
+   echo "$appName"-iOS completed in "$(($endttime_platform - $starttime_platform))" seconds
+
+   endtime_band=$(date +%s)
+   echo "$band" END PROCESSING: $(date) total "$(($endtime_band - $starttime_band))" seconds
+   echo
+done
+
+endtime_total=$(date +%s)
+echo "Elapsed time: $(($endtime_total - $starttime_total)) seconds"
+echo *~*~*~*DEPLOYING iTour APPS COMPLETE*~*~*~*
+echo
+echo
+echo
+echo
