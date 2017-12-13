@@ -104,7 +104,7 @@ class WeatherWidget extends Component {
           >
             <View
               style={[
-                styles.widgetContainer,
+                styles.weatherWidgetContainer,
                 { backgroundColor: this.state.colorBackground }
               ]}
             >

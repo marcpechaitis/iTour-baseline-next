@@ -9,15 +9,15 @@ import {
   Text,
   View
 } from 'react-native';
-import {
-  Scene,
-  Reducer,
-  Router,
-  Switch,
-  Modal,
-  Actions,
-  ActionConst
-} from 'react-native-router-flux';
+// import {
+//   Scene,
+//   Reducer,
+//   Router,
+//   Switch,
+//   Modal,
+//   Actions,
+//   ActionConst
+// } from 'react-native-router-flux';
 import params from './helpers/params';
 import styles from './helpers/styles';
 import CodePush from 'react-native-code-push';
@@ -26,6 +26,8 @@ import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import EventList from './components/EventList';
 import EventDetail from './components/EventDetail';
 import WebBrowser from './components/WebBrowser';
+
+import { Root, Tabs } from './helpers/router';
 
 let appstate;
 let codePushDeploymentKeyIOS;
@@ -148,51 +150,52 @@ export default class iTour extends Component<{}> {
     GoogleAnalytics.setDispatchInterval(30);
 
     return (
+      <Root />
       // <View style={styles.container}>
       //   <Text style={styles.welcome}>Welcome to React Native!</Text>
       //   <Text style={styles.instructions}>To get started, edit App.js</Text>
       //   <Text style={styles.instructions}>{instructions}</Text>
       // </View>
 
-      <Router
+      // <Router
       // navigationBarStyle={styles.navBar}
       // titleStyle={styles.navBarTextStyle}
       // barButtonTextStyle={styles.barButtonTextStyle}
       // barButtonIconStyle={styles.barButtonIconStyle}
       // allowFontScaling={false}
-      >
-        <Scene key="root">
-          <Scene
-            key="EventList"
-            component={EventList}
-            navigationBarStyle={styles.navBar}
-            titleStyle={styles.navBarTextStyle}
-            barButtonTextStyle={styles.barButtonTextStyle}
-            barButtonIconStyle={styles.barButtonIconStyle}
-            allowFontScaling={false}
-            title={params.APP_NAME}
-            initial={true}
-          />
-          <Scene
-            key="EventDetail"
-            component={EventDetail}
-            navigationBarStyle={styles.navBar}
-            titleStyle={styles.navBarTextStyle}
-            barButtonTextStyle={styles.barButtonTextStyle}
-            barButtonIconStyle={styles.barButtonIconStyle}
-            allowFontScaling={false}
-          />
-          <Scene
-            key="WebBrowser"
-            component={WebBrowser}
-            navigationBarStyle={styles.navBar}
-            titleStyle={styles.navBarTextStyle}
-            barButtonTextStyle={styles.barButtonTextStyle}
-            barButtonIconStyle={styles.barButtonIconStyle}
-            allowFontScaling={false}
-          />
-        </Scene>
-      </Router>
+      // >
+      //   <Scene key="root">
+      //     <Scene
+      //       key="EventList"
+      //       component={EventList}
+      //       navigationBarStyle={styles.navBar}
+      //       titleStyle={styles.navBarTextStyle}
+      //       barButtonTextStyle={styles.barButtonTextStyle}
+      //       barButtonIconStyle={styles.barButtonIconStyle}
+      //       allowFontScaling={false}
+      //       title={params.APP_NAME}
+      //       initial={true}
+      //     />
+      //     <Scene
+      //       key="EventDetail"
+      //       component={EventDetail}
+      //       navigationBarStyle={styles.navBar}
+      //       titleStyle={styles.navBarTextStyle}
+      //       barButtonTextStyle={styles.barButtonTextStyle}
+      //       barButtonIconStyle={styles.barButtonIconStyle}
+      //       allowFontScaling={false}
+      //     />
+      //     <Scene
+      //       key="WebBrowser"
+      //       component={WebBrowser}
+      //       navigationBarStyle={styles.navBar}
+      //       titleStyle={styles.navBarTextStyle}
+      //       barButtonTextStyle={styles.barButtonTextStyle}
+      //       barButtonIconStyle={styles.barButtonIconStyle}
+      //       allowFontScaling={false}
+      //     />
+      //   </Scene>
+      // </Router>
     );
   }
 }

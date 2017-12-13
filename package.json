@@ -14,10 +14,12 @@
     "react-native-action-button": "^2.8.3",
     "react-native-code-push": "^5.2.0-beta",
     "react-native-config": "^0.10.0",
+    "react-native-elements": "^0.18.4",
     "react-native-google-analytics-bridge": "^5.4.1",
     "react-native-router-flux": "^4.0.0-beta.24",
     "react-native-splash-screen": "^3.0.6",
-    "react-native-vector-icons": "^4.4.2"
+    "react-native-vector-icons": "^4.4.2",
+    "react-navigation": "^1.0.0-beta.21"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",

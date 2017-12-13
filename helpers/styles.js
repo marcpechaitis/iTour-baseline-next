@@ -22,8 +22,6 @@ function isIphoneX() {
   }
 }
 
-console.log(iPhoneNavBarHeight);
-
 function randomColor() {
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -32,7 +30,7 @@ function randomColor() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    height: 100 * vh,
+    //   height: 100 * vh,
     backgroundColor: colors.PRIMARY_COLOR
   },
   headerContainer: {
@@ -42,10 +40,10 @@ const styles = StyleSheet.create({
   },
   /* Navigation Bar */
   navBar: {
-    backgroundColor: colors.PRIMARY_COLOR,
-    height: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
-    paddingTop: Platform.OS === 'ios' ? iPhonePaddingTop : 54
-    //  alignSelf: (Platform.OS === 'ios' ) ? 'center' : 'flex-start'
+    backgroundColor: colors.PRIMARY_COLOR
+    // height: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
+    // paddingTop: Platform.OS === 'ios' ? iPhonePaddingTop : 54
+    // //  alignSelf: (Platform.OS === 'ios' ) ? 'center' : 'flex-start'
     //  paddingLeft: (Platform.OS === 'ios') ? 0 : 4*vw
   },
   navBarTitleStyle: {
@@ -54,12 +52,12 @@ const styles = StyleSheet.create({
   },
   navBarTextStyle: {
     color: colors.APP_TEXT_COLOR,
-    textAlign: Platform.OS === 'ios' ? 'center' : 'left',
-    width: 100 * vw,
-    fontSize: 6 * vw,
-    paddingLeft: Platform.OS === 'ios' ? 0 : 30,
-    paddingTop: Platform.OS === 'ios' ? -3 : -4
-    //    textAlign: (Platform.OS === 'ios') ? 'center' : 'left',
+    // textAlign: Platform.OS === 'ios' ? 'center' : 'left',
+    // width: 100 * vw,
+    fontSize: 6 * vw
+    // paddingLeft: Platform.OS === 'ios' ? 0 : 30,
+    // paddingTop: Platform.OS === 'ios' ? -3 : -4
+    // //    textAlign: (Platform.OS === 'ios') ? 'center' : 'left',
   },
   appTextColor: {
     color: colors.APP_TEXT_COLOR
@@ -168,7 +166,7 @@ const styles = StyleSheet.create({
     color: colors.APP_TEXT_COLOR
   },
   detailsContainer: {
-    // flex: 1,
+    flex: 1,
     flexWrap: 'wrap',
     alignItems: 'flex-end',
     width: 62 * vw
@@ -396,8 +394,17 @@ const styles = StyleSheet.create({
 
   /* WeatherWidget */
   widgetContainer: {
-    maxWidth: 30 * vw,
-    // flex: 1,
+    //    maxWidth: 30 * vw,
+    width: 27 * vw,
+    // flex: 0.3,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 1 * vw
+  },
+  weatherWidgetContainer: {
+    // maxWidth: 40 * vw,
+    width: 38 * vw,
+    // flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 1 * vw

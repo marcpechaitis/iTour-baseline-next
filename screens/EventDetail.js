@@ -41,14 +41,17 @@ class EventDetail extends Component {
     let IphoneXBottomOffset = 30;
 
     if (Platform.OS === 'ios' && Dimensions.get('window').height === 812) {
-      IphoneXBottomOffset = 50;
+      console.log('hey hey');
+      IphoneXBottomOffset = 80;
+    } else {
+      console.log('ho ho');
     }
 
     this.state = {
       isLoadingGeocodeData: true,
       LoadingText: 'Loading Show...',
       isError: false,
-      theEvent: this.props.event,
+      theEvent: this.props.navigation.state.params.event,
       geocodeData: null,
       userPosition: null,
       isFindingUser: false,
@@ -60,13 +63,15 @@ class EventDetail extends Component {
 
   componentDidMount() {
     // Actions.refresh({
-    //   title: this.props.event.title,
+    //   title: this.props.navigation.state.params.event.title,
     //   rightTitle: 'Setlist',
     //   rightButtonTextStyle: styles.appTextColor,
     //   onRight: () => this.getURLAndCallWebBrowser('setlist')
     // });
     GoogleAnalytics.trackScreenView(
-      this.props.event.YYYYMMDD + ' ' + this.props.event.altName
+      this.props.navigation.state.params.event.YYYYMMDD +
+        ' ' +
+        this.props.navigation.state.params.event.altName
     );
     this.getEventLocation();
   }
@@ -77,10 +82,13 @@ class EventDetail extends Component {
       AsyncStorage.multiGet(
         [event.venue + '.lat', event.venue + '.lng'],
         (error, stores) => {
-          this.props.event.lat = stores[0][1];
-          this.props.event.lng = stores[1][1];
+          this.props.navigation.state.params.event.lat = stores[0][1];
+          this.props.navigation.state.params.event.lng = stores[1][1];
 
-          if (this.props.event.lat === null || this.props.event.lng === null) {
+          if (
+            this.props.navigation.state.params.event.lat === null ||
+            this.props.navigation.state.params.event.lng === null
+          ) {
             // local storage does not exist, fetch it from API
             this.fetchGeocode();
           } else {
@@ -101,15 +109,15 @@ class EventDetail extends Component {
       'https://maps.googleapis.com/maps/api/geocode/json?address=';
     GEOCODE_URL =
       GEOCODE_URL +
-      this.props.event.address +
+      this.props.navigation.state.params.event.address +
       ',+' +
-      this.props.event.city +
+      this.props.navigation.state.params.event.city +
       ',+' +
-      this.props.event.state +
+      this.props.navigation.state.params.event.state +
       ' ';
     GEOCODE_URL =
       GEOCODE_URL +
-      this.props.event.postal +
+      this.props.navigation.state.params.event.postal +
       '&key=' +
       Config.GOOGLE_GEOCODE_API_KEY;
     GEOCODE_URL = GEOCODE_URL.replace(/ /g, '+');
@@ -124,26 +132,28 @@ class EventDetail extends Component {
             // now that we have the response, save the values to local storage so we don't have to call API again for this venue
             await AsyncStorage.multiSet([
               [
-                this.props.event.venue + '.lat',
+                this.props.navigation.state.params.event.venue + '.lat',
                 JSON.stringify(responseJson.results[0].geometry.location.lat)
               ],
               [
-                this.props.event.venue + '.lng',
+                this.props.navigation.state.params.event.venue + '.lng',
                 JSON.stringify(responseJson.results[0].geometry.location.lng)
               ]
             ]);
-            //          console.log(this.props.event.venue + ' location saved!');
+            //          console.log(this.props.navigation.state.params.event.venue + ' location saved!');
           } catch (error) {
             // Error saving data
             console.log(error.message);
             GoogleAnalytics.trackException(error.message, false);
           }
 
-          this.props.event.lat = responseJson.results[0].geometry.location.lat;
-          this.props.event.lng = responseJson.results[0].geometry.location.lng;
+          this.props.navigation.state.params.event.lat =
+            responseJson.results[0].geometry.location.lat;
+          this.props.navigation.state.params.event.lng =
+            responseJson.results[0].geometry.location.lng;
           this.setState({
             isLoadingGeocodeData: false,
-            theEvent: this.props.event,
+            theEvent: this.props.navigation.state.params.event,
             geocodeData: responseJson
           });
         } else {
@@ -152,7 +162,7 @@ class EventDetail extends Component {
             'https://maps.googleapis.com/maps/api/place/textsearch/json?query=';
           GEOCODE_URL =
             GEOCODE_URL +
-            this.props.event.venue +
+            this.props.navigation.state.params.event.venue +
             '&key=' +
             Config.GOOGLE_GEOCODE_API_KEY;
           GEOCODE_URL = GEOCODE_URL.replace(/ /g, '+');
@@ -167,13 +177,13 @@ class EventDetail extends Component {
                   // now that we have the response, save the values to local storage so we don't have to call API again for this venue
                   await AsyncStorage.multiSet([
                     [
-                      this.props.event.venue + '.lat',
+                      this.props.navigation.state.params.event.venue + '.lat',
                       JSON.stringify(
                         responseJson.results[0].geometry.location.lat
                       )
                     ],
                     [
-                      this.props.event.venue + '.lng',
+                      this.props.navigation.state.params.event.venue + '.lng',
                       JSON.stringify(
                         responseJson.results[0].geometry.location.lng
                       )
@@ -185,13 +195,13 @@ class EventDetail extends Component {
                   GoogleAnalytics.trackException(error.message, false);
                 }
 
-                this.props.event.lat =
+                this.props.navigation.state.params.event.lat =
                   responseJson.results[0].geometry.location.lat;
-                this.props.event.lng =
+                this.props.navigation.state.params.event.lng =
                   responseJson.results[0].geometry.location.lng;
                 this.setState({
                   isLoadingGeocodeData: false,
-                  theEvent: this.props.event,
+                  theEvent: this.props.navigation.state.params.event,
                   geocodeData: responseJson
                 });
               } else {
@@ -223,8 +233,8 @@ class EventDetail extends Component {
   }
 
   render() {
-    event = this.props.event;
-
+    //  event = this.props.navigation.state.params.event;
+    event = this.props.navigation.state.params.event;
     if (this.state.isLoadingGeocodeData) {
       return this.renderLoadingView();
     } else {
@@ -451,11 +461,17 @@ class EventDetail extends Component {
 
   getDirectionsViaMapsApp() {
     GoogleAnalytics.trackEvent('Map', 'directions', {
-      label: this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
+      label:
+        this.props.navigation.state.params.event.YYYYMMDD +
+        ' ' +
+        this.props.navigation.state.params.event.altName,
       value: 0
     });
     //    this.determineLocation();
-    if (this.props.event.lat !== null && this.props.event.lng !== null) {
+    if (
+      this.props.navigation.state.params.event.lat !== null &&
+      this.props.navigation.state.params.event.lng !== null
+    ) {
       this.setState({
         isFindingUser: true,
         LoadingText: 'Finding current location...'
@@ -474,7 +490,10 @@ class EventDetail extends Component {
                 ',';
               mapsURL = mapsURL + position.coords.longitude + '&daddr=';
               mapsURL =
-                mapsURL + this.props.event.lat + ',' + this.props.event.lng;
+                mapsURL +
+                this.props.navigation.state.params.event.lat +
+                ',' +
+                this.props.navigation.state.params.event.lng;
               Linking.canOpenURL(mapsURL)
                 .then(supported => {
                   if (!supported) {
@@ -520,7 +539,10 @@ class EventDetail extends Component {
 
   makePhoneCall(phoneNbrToCall) {
     GoogleAnalytics.trackEvent('Phone', 'venue', {
-      label: this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
+      label:
+        this.props.navigation.state.params.event.YYYYMMDD +
+        ' ' +
+        this.props.navigation.state.params.event.altName,
       value: 0
     });
     const phoneURL = 'tel:' + phoneNbrToCall;
@@ -541,13 +563,24 @@ class EventDetail extends Component {
 
   openMapAtEventLocation() {
     GoogleAnalytics.trackEvent('Map', 'venue', {
-      label: this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
+      label:
+        this.props.navigation.state.params.event.YYYYMMDD +
+        ' ' +
+        this.props.navigation.state.params.event.altName,
       value: 0
     });
-    if (this.props.event.lat !== null && this.props.event.lng !== null) {
+    if (
+      this.props.navigation.state.params.event.lat !== null &&
+      this.props.navigation.state.params.event.lng !== null
+    ) {
       let mapsURL = 'http://maps.apple.com/?ll=';
-      mapsURL = mapsURL + this.props.event.lat + ',' + this.props.event.lng;
-      mapsURL = mapsURL + '&q=' + this.props.event.venue;
+      mapsURL =
+        mapsURL +
+        this.props.navigation.state.params.event.lat +
+        ',' +
+        this.props.navigation.state.params.event.lng;
+      mapsURL =
+        mapsURL + '&q=' + this.props.navigation.state.params.event.venue;
 
       this.LaunchURL(mapsURL);
     } else {
@@ -559,17 +592,20 @@ class EventDetail extends Component {
     let targetURL = params.BAND_URL_DEFAULT;
     let targetTitle = params.BAND_NAME;
     GoogleAnalytics.trackEvent('WebView', targetType, {
-      label: this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
+      label:
+        this.props.navigation.state.params.event.YYYYMMDD +
+        ' ' +
+        this.props.navigation.state.params.event.altName,
       value: 0
     });
     switch (targetType) {
       case 'music':
-        if (this.props.event.country === 'USA') {
+        if (this.props.navigation.state.params.event.country === 'USA') {
           targetURL =
             params.MUSIC_URL1 +
-            this.props.event.YYYYMMDD +
+            this.props.navigation.state.params.event.YYYYMMDD +
             params.MUSIC_URL2 +
-            this.props.event.postal +
+            this.props.navigation.state.params.event.postal +
             params.MUSIC_URL3;
         } else {
           targetURL = params.MUSIC_URL_NON_USA;
@@ -577,11 +613,11 @@ class EventDetail extends Component {
         targetTitle = params.MUSIC_TITLE;
         break;
       case 'seating':
-        targetURL = this.props.event.seatingURL;
+        targetURL = this.props.navigation.state.params.event.seatingURL;
         targetTitle = params.SEATING_TITLE;
         break;
       case 'setlist':
-        targetURL = this.props.event.setlistURL;
+        targetURL = this.props.navigation.state.params.event.setlistURL;
         targetTitle = params.SETLIST_TITLE;
         break;
       case 'tickets':
@@ -589,20 +625,21 @@ class EventDetail extends Component {
         targetTitle = params.TICKETS_TITLE;
         break;
       case 'venue':
-        targetURL = this.props.event.venueURL;
-        targetTitle = this.props.event.venue;
+        targetURL = this.props.navigation.state.params.event.venueURL;
+        targetTitle = this.props.navigation.state.params.event.venue;
         break;
       case 'videos':
-        targetURL = params.VIDEO_URL + this.props.event.altName;
+        targetURL =
+          params.VIDEO_URL + this.props.navigation.state.params.event.altName;
         targetURL = targetURL.replace(/ /g, '%20');
         targetTitle = params.VIDEO_TITLE;
         break;
       case 'weather':
         targetURL =
           params.WEATHER_URL +
-          this.props.event.lat +
+          this.props.navigation.state.params.event.lat +
           ',' +
-          this.props.event.lng;
+          this.props.navigation.state.params.event.lng;
         targetTitle = params.WEATHER_TITLE;
         break;
       default:
@@ -614,7 +651,8 @@ class EventDetail extends Component {
   }
 
   showWebBrowser(targetURL, targetTitle) {
-    Actions.WebBrowser({ target: targetURL, targetTitle: targetTitle });
+    // Actions.WebBrowser({ target: targetURL, targetTitle: targetTitle });
+    console.log('open WebView');
   }
 }
 
