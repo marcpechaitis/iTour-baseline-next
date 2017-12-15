@@ -74,7 +74,6 @@ const BLANK_STRING = ' ';
 
 class MyListItem extends React.PureComponent {
   _onPress = () => {
-    console.log('onPress');
     this.showEventDetail(this.props.event);
   };
 
@@ -115,7 +114,6 @@ class MyListItem extends React.PureComponent {
     //    Actions.EventDetail({ event });
 
     this.props.navigation.navigate('EventDetail', { event: event });
-    console.log('bingo');
   }
 
   render() {
@@ -307,7 +305,7 @@ class EventList extends Component {
 
     try {
       let response = await fetch(REQUEST_URL);
-      console.log(response.status);
+
       if (response.status === 200) {
         // let responseData = await response.json();
         responseData = await response.json();
@@ -456,7 +454,6 @@ class EventList extends Component {
     event.userPosition = this.state.userPosition;
 
     //    Actions.EventDetail({ event });
-    console.log('bingo');
     this.props.navigation.navigate('EventDetail', { event: event });
   }
 
@@ -556,8 +553,6 @@ class EventList extends Component {
     if (this.state.isError) {
       return this.renderLoadingError();
     }
-
-    console.log(JSON.stringify(responseData));
 
     return (
       <View backgroundColor={colors.SECONDARY_BG_COLOR}>

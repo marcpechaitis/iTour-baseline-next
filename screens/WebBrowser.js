@@ -33,8 +33,7 @@ class WebBrowser extends Component {
 
   componentDidMount() {
     //    console.log('WebBrowser componentDidMount');
-
-    Actions.refresh({ title: this.props.targetTitle });
+    //  Actions.refresh({ title: this.props.targetTitle });
   }
 
   componentWillUnmount() {

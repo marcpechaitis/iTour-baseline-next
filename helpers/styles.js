@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   },
   /* Navigation Bar */
   navBar: {
-    backgroundColor: colors.PRIMARY_COLOR
+    backgroundColor: colors.PRIMARY_COLOR,
+    shadowColor: 'transparent'
     // height: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
     // paddingTop: Platform.OS === 'ios' ? iPhonePaddingTop : 54
     // //  alignSelf: (Platform.OS === 'ios' ) ? 'center' : 'flex-start'
@@ -200,16 +201,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     //    paddingTop: 1*vw + 64,
     // marginTop: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
-    paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh,
+    // paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh,
     position: 'relative',
     backgroundColor: colors.SECONDARY_BG_COLOR
   },
-  container: {
-    marginTop: 1.5 * vw,
-    backgroundColor: colors.SECONDARY_BG_COLOR,
-    height: 100 * vh
-  },
+  // container: {
+  //   marginTop: 1.5 * vw,
+  //   backgroundColor: colors.SECONDARY_BG_COLOR,
+  //   height: 100 * vh
+  // },
   infoContainer: {
+    //    position: 'relative',
+    //    flex: 1,
     width: 96 * vw,
     marginTop: 1 * vw,
     marginLeft: 2 * vw,
@@ -224,14 +227,20 @@ const styles = StyleSheet.create({
 */
   },
   eventInfoContainer: {
-    // flex: 1,
+    position: 'relative',
+    flexDirection: 'column',
+    flexGrow: 1,
+    // flex: 0,
+    // justifyContent: 'space-around',
+    alignItems: 'center',
     height: 32 * vh,
     backgroundColor: colors.PRIMARY_BG_COLOR,
     paddingTop: 1 * vw,
     paddingBottom: 1 * vw
   },
   extraInfoContainer: {
-    // flex: 1,
+    //   flex: 1,
+    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     height: 10 * vh,
@@ -242,7 +251,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.PRIMARY_BG_COLOR
   },
   mapInfoContainer: {
-    // flex: 1,
+    //    flex: 1,
     height: 46 * vh,
     width: 100 * vw,
     marginTop: Platform.OS === 'ios' ? 4 * vw : 0 * vw,
@@ -300,21 +309,34 @@ const styles = StyleSheet.create({
   //  text: {
   //    color: colors.APP_TEXT_COLOR
   //  },
+  overlayText: {
+    backgroundColor: colors.PRIMARY_BG_COLOR,
+    paddingLeft: 5,
+    paddingRight: 5
+  },
   altName: {
+    //  flex: 0,
+    //   position: 'relative',
     fontSize: 12 * vw,
     textAlign: 'center'
   },
   notes: {
+    // flex: 1,
+    position: 'relative',
     fontSize: 4 * vw
     //  paddingTop: 1*vh,
     //  backgroundColor: 'red'
   },
   eventTimes: {
+    //   flex: 1,
+    position: 'relative',
     fontSize: 4 * vw
     //  paddingTop: 1*vh,
     //  backgroundColor: 'blue'
   },
   locationContainerDetail: {
+    // flex: 1,
+    position: 'relative',
     marginTop: 1 * vh,
     alignItems: 'flex-end',
     width: 96 * vw,

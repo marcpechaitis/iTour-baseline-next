@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   View
 } from 'react-native';
+import colors from '../helpers/colors';
 import styles from '../helpers/styles';
 import Config from 'react-native-config';
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
@@ -124,58 +125,86 @@ class PlacesWidget extends Component {
           PLACE_PHOTO_URL + '&photoreference=' + this.state.placePhotoReference;
         PLACE_PHOTO_URL =
           PLACE_PHOTO_URL + '&key=' + Config.GOOGLE_PLACES_API_KEY;
-
+        const resizeMode = 'cover';
         return (
+          // <View>
+          //   <TouchableHighlight
+          //     onPress={() => {
+          //       this.setModalVisible(true);
+          //       GoogleAnalytics.trackEvent('PlacesPhoto', 'venue', {
+          //         label:
+          //           this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
+          //         value: 0
+          //       });
+          //     }}
+          //   >
+          //     <View>
           <View>
-            <TouchableHighlight
-              onPress={() => {
-                this.setModalVisible(true);
-                GoogleAnalytics.trackEvent('PlacesPhoto', 'venue', {
-                  label:
-                    this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
-                  value: 0
-                });
+            <Image
+              style={{ resizeMode, position: 'relative' }}
+              source={{
+                uri: PLACE_PHOTO_URL,
+                width: width,
+                height: 32 * vh
+              }}
+            />
+            {/* <View
+              style={{
+                position: 'absolute',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: width,
+                height: 32 * vh
               }}
             >
-              <View>
-                <Image
-                  source={{
-                    uri: PLACE_PHOTO_URL,
-                    width: Math.round(30 * vw),
-                    height: Math.round(20 * vw)
-                  }}
-                />
-              </View>
-            </TouchableHighlight>
-            <View>
-              <Modal
-                animationType={'slide'}
-                transparent={false}
-                visible={this.state.modalVisible}
-                onRequestClose={() => {
-                  this.setModalVisible(!this.state.modalVisible);
+              <Text
+                style={{
+                  color: 'white',
+                  backgroundColor: colors.PRIMARY_BG_COLOR,
+                  textAlign: 'center',
+                  fontSize: 30
+                  // alignContent: 'center'
+                  // padding: 40
+                  // top: 300
                 }}
               >
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}
-                >
-                  <View style={styles.placePictureModal}>
-                    <Image
-                      source={{
-                        uri: PLACE_PHOTO_URL,
-                        width: Math.round(90 * vw),
-                        height: Math.round(60 * vw)
-                        //   height: 100 * vh,
-                        //   width: 100 * vw
-                      }}
-                    />
-                  </View>
-                </TouchableHighlight>
-              </Modal>
-            </View>
+                BINGO
+              </Text>
+            </View> */}
           </View>
+
+          //     </View>
+          //   </TouchableHighlight>
+          //   <View>
+          //     <Modal
+          //       animationType={'slide'}
+          //       transparent={false}
+          //       visible={this.state.modalVisible}
+          //       onRequestClose={() => {
+          //         this.setModalVisible(!this.state.modalVisible);
+          //       }}
+          //     >
+          //       <TouchableHighlight
+          //         onPress={() => {
+          //           this.setModalVisible(!this.state.modalVisible);
+          //         }}
+          //       >
+          //         <View style={styles.placePictureModal}>
+          //           <Image
+          //             source={{
+          //               uri: PLACE_PHOTO_URL,
+          //               width: Math.round(90 * vw),
+          //               height: Math.round(60 * vw)
+          //               //   height: 100 * vh,
+          //               //   width: 100 * vw
+          //             }}
+          //           />
+          //         </View>
+          //       </TouchableHighlight>
+          //     </Modal>
+          //   </View>
+          // </View>
         );
       } else {
         return;

@@ -39,14 +39,15 @@ export const MainScreenNavigator = TabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: 'white',
-      inactiveTintColor: 'grey',
+      activeTintColor: colors.APP_TEXT_COLOR,
+      inactiveTintColor: colors.DISABLED_WASH,
       style: {
         backgroundColor: colors.PRIMARY_BG_COLOR
       },
       indicatorStyle: {
-        backgroundColor: 'white'
+        backgroundColor: colors.APP_TEXT_COLOR
       },
+
       allowFontScaling: false
     }
     //   tabBarComponent: TabBarBottom,
@@ -60,11 +61,14 @@ export const EventStack = StackNavigator(
       screen: MainScreenNavigator,
       navigationOptions: {
         title: params.APP_NAME,
-        headerTintColor: 'black',
+        headerTintColor: 'white',
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerBackTitleStyle: styles.navBarTextStyle,
-        headerBackTitle: null
+        headerBackTitle: null,
+        shadowColor: 'transparent',
+        backgroundColor: 'transparent',
+        borderBottomWidth: 0
       },
 
       headerTitleAllowFontScaling: false
@@ -77,8 +81,10 @@ export const EventStack = StackNavigator(
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerRight: (
-          <TouchableOpacity>
-            <Text>Setlist</Text>
+          <TouchableOpacity
+            onPress={() => this.getURLAndCallWebBrowser('setlist')}
+          >
+            <Text style={{ color: 'white', paddingRight: 16 }}>Setlist</Text>
           </TouchableOpacity>
           // <Button
           //   title="Setlist"

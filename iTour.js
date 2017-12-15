@@ -50,7 +50,6 @@ export default class iTour extends Component<{}> {
     //   updateDialog: false,
     //   installMode: CodePush.InstallMode.ON_APP_RESUME
     // });
-    console.log('Mounted');
   }
 
   getCodePushDeploymentKey() {

@@ -10,12 +10,13 @@ import {
   Platform,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
 import styles from '../helpers/styles';
 import colors from '../helpers/colors';
 import params from '../helpers/params';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import Config from 'react-native-config';
 import Dimensions from 'Dimensions';
@@ -29,8 +30,11 @@ import PlacesWidget from '../components/PlacesWidget';
 import WeatherWidget from '../components/WeatherWidget';
 import CountdownWidget from '../components/CountdownWidget';
 
-const vh = Dimensions.get('window').height / 100;
-const vw = Dimensions.get('window').width / 100;
+const { width, height, scale } = Dimensions.get('window'),
+  vw = width / 100,
+  vh = height / 100,
+  vmin = Math.min(vw, vh),
+  vmax = Math.max(vw, vh);
 
 let event;
 let mapsURL;
@@ -41,7 +45,6 @@ class EventDetail extends Component {
     let IphoneXBottomOffset = 30;
 
     if (Platform.OS === 'ios' && Dimensions.get('window').height === 812) {
-      console.log('hey hey');
       IphoneXBottomOffset = 80;
     } else {
       console.log('ho ho');
@@ -68,6 +71,16 @@ class EventDetail extends Component {
     //   rightButtonTextStyle: styles.appTextColor,
     //   onRight: () => this.getURLAndCallWebBrowser('setlist')
     // });
+    const params = {
+      right: (
+        <TouchableOpacity
+          onPress={() => this.getURLAndCallWebBrowser('setlist')}
+        >
+          <Text style={{ color: 'white', paddingRight: 16 }}>Setlist</Text>
+        </TouchableOpacity>
+      )
+    };
+    this.props.navigation.setParams(params);
     GoogleAnalytics.trackScreenView(
       this.props.navigation.state.params.event.YYYYMMDD +
         ' ' +
@@ -261,72 +274,134 @@ class EventDetail extends Component {
           {/* <View style={[styles.headerContainer]} /> */}
           <View style={[styles.contentContainer]}>
             <View style={[styles.infoContainer, styles.eventInfoContainer]}>
-              <TouchableHighlight
-                onPress={() => this.getURLAndCallWebBrowser('venue')}
-                underlayColor={colors.PRIMARY_COLOR}
+              <PlacesWidget event={this.state.theEvent} />
+              <View
+                style={{
+                  position: 'absolute',
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: width,
+                  height: 32 * vh
+                }}
               >
-                <View>
-                  <Text style={[styles.appTextColor, styles.altName]}>
-                    {altName}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              {(() => {
-                if (notes) {
-                  return (
-                    <Text style={[styles.appTextColor, styles.notes]}>
-                      {notes}
-                    </Text>
-                  );
-                }
-              })()}
-              <Text style={[styles.appTextColor, styles.eventTimes]}>
-                {eventTimes}
-              </Text>
-              <View style={styles.locationContainerDetail}>
                 <TouchableHighlight
-                  onPress={() => this.getDirectionsViaMapsApp()}
+                  onPress={() => this.getURLAndCallWebBrowser('venue')}
                   underlayColor={colors.PRIMARY_COLOR}
                 >
                   <View>
-                    <Text style={[styles.appTextColor, styles.venueDetail]}>
-                      {venue}
+                    <Text
+                      style={[
+                        styles.appTextColor,
+                        styles.altName,
+                        styles.overlayText
+                      ]}
+                    >
+                      {altName}
                     </Text>
-                    <Text style={[styles.appTextColor, styles.address]}>
-                      {address}
-                    </Text>
-                    <Text style={[styles.appTextColor, styles.address]}>
-                      {cityStatePostal}
-                    </Text>
-                    {(() => {
-                      if (country !== 'USA') {
-                        return (
-                          <Text style={[styles.appTextColor, styles.address]}>
-                            {country}
-                          </Text>
-                        );
-                      }
-                    })()}
                   </View>
                 </TouchableHighlight>
                 {(() => {
-                  if (phone !== '') {
+                  if (notes) {
                     return (
-                      <TouchableHighlight
-                        onPress={() => this.makePhoneCall(phoneToCall)}
-                        underlayColor={colors.PRIMARY_COLOR}
+                      <Text
+                        style={[
+                          styles.appTextColor,
+                          styles.notes,
+                          styles.overlayText
+                        ]}
                       >
-                        <View>
-                          <Text style={[styles.appTextColor, styles.phone]}>
-                            {phone}
-                          </Text>
-                        </View>
-                      </TouchableHighlight>
+                        {notes}
+                      </Text>
                     );
                   }
                 })()}
+                <Text
+                  style={[
+                    styles.appTextColor,
+                    styles.eventTimes,
+                    styles.overlayText
+                  ]}
+                >
+                  {eventTimes}
+                </Text>
+                <View style={styles.locationContainerDetail}>
+                  <TouchableHighlight
+                    onPress={() => this.getDirectionsViaMapsApp()}
+                    underlayColor={colors.PRIMARY_COLOR}
+                  >
+                    <View>
+                      <Text
+                        style={[
+                          styles.appTextColor,
+                          styles.venueDetail,
+                          styles.overlayText
+                        ]}
+                      >
+                        {venue}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.appTextColor,
+                          styles.address,
+                          styles.overlayText
+                        ]}
+                      >
+                        {address}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.appTextColor,
+                          styles.address,
+                          styles.overlayText
+                        ]}
+                      >
+                        {cityStatePostal}
+                      </Text>
+                      {(() => {
+                        if (country !== 'USA') {
+                          return (
+                            <Text
+                              style={[
+                                styles.appTextColor,
+                                styles.address,
+                                styles.overlayText
+                              ]}
+                            >
+                              {country}
+                            </Text>
+                          );
+                        }
+                      })()}
+                    </View>
+                  </TouchableHighlight>
+                  {(() => {
+                    if (phone !== '') {
+                      return (
+                        <TouchableHighlight
+                          onPress={() => this.makePhoneCall(phoneToCall)}
+                          underlayColor={colors.PRIMARY_COLOR}
+                        >
+                          <View>
+                            <Text
+                              style={[
+                                styles.appTextColor,
+                                styles.phone,
+                                styles.overlayText
+                              ]}
+                            >
+                              {phone}
+                            </Text>
+                          </View>
+                        </TouchableHighlight>
+                      );
+                    }
+                  })()}
+                </View>
               </View>
+              {/* </PlacesWidget> */}
             </View>
+
             <View style={[styles.infoContainer, styles.extraInfoContainer]}>
               {(() => {
                 if (!this.state.isFindingUser) {
@@ -379,7 +454,7 @@ class EventDetail extends Component {
                     styles.placePictureInfoContainer
                   ]}
                 >
-                  <PlacesWidget event={this.state.theEvent} />
+                  {/* <PlacesWidget event={this.state.theEvent} /> */}
                 </View>
               </View>
             </TouchableHighlight>
@@ -652,6 +727,10 @@ class EventDetail extends Component {
 
   showWebBrowser(targetURL, targetTitle) {
     // Actions.WebBrowser({ target: targetURL, targetTitle: targetTitle });
+    this.props.navigation.navigate('WebBrowser', {
+      target: targetURL,
+      targetTitle: targetTitle
+    });
     console.log('open WebView');
   }
 }
