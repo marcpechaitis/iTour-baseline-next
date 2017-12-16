@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   flexOne: {
-    // flex: 1
+    flex: 1
   }
 });
 
