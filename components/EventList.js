@@ -65,7 +65,6 @@ switch (params.BAND) {
     break;
 }
 
-console.log(dataURL);
 let REQUEST_URL = dataURL + '?nocache=' + new Date().getTime();
 let userPositionSession;
 const BLANK_STRING = ' ';

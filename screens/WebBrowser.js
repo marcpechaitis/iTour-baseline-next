@@ -14,7 +14,7 @@ const DEFAULT_URL = params.BAND_URL_DEFAULT;
 class WebBrowser extends Component {
   constructor(props) {
     super(props);
-
+    console.log('URL: ' + this.props.target);
     this.state = {
       title: '',
       url: DEFAULT_URL,
@@ -41,44 +41,65 @@ class WebBrowser extends Component {
   }
 
   render() {
+    const tempURL = 'https://google.com';
+
     return (
-      <View style={styles.flexOne}>
-        <WebView
-          ref={WEBVIEW_REF}
-          automaticallyAdjustContentInsets={true}
-          source={{ uri: this.props.target }}
-          style={styles.webViewContentController}
-          javascriptEnabled={true}
-          domStorageEnabled={true}
-          decelerationRate="normal"
-          onNavigationStateChange={this.onNavigationStateChange}
-          onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
-          startInLoadingState={true}
-          scalesPageToFit={true}
-        />
-        <View style={styles.webViewFooterContainer}>
-          <TouchableOpacity onPress={this.goBack}>
-            <MaterialIcons
-              name="navigate-before"
-              style={
-                this.state.backButtonEnabled
-                  ? styles.navButton
-                  : styles.disabledButton
-              }
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.goForward}>
-            <MaterialIcons
-              name="navigate-next"
-              style={
-                this.state.forwardButtonEnabled
-                  ? styles.navButton
-                  : styles.disabledButton
-              }
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <WebView
+        ref={WEBVIEW_REF}
+        automaticallyAdjustContentInsets={true}
+        // source={{ uri: this.props.target }}
+        //  source={{ uri: this.props.target }}
+        source={{ uri: this.props.target }}
+        style={styles.webViewContentController}
+        javascriptEnabled={true}
+        domStorageEnabled={true}
+        decelerationRate="normal"
+        onNavigationStateChange={this.onNavigationStateChange}
+        onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
+        startInLoadingState={true}
+        scalesPageToFit={true}
+      />
+      //  {/*   <View style={styles.flexOne}> */}
+      // <View>
+      //   <WebView
+      //     ref={WEBVIEW_REF}
+      //     automaticallyAdjustContentInsets={true}
+      //     // source={{ uri: this.props.target }}
+      //     // source={{ uri: this.props.target }}
+      //     source={{ uri: tempURL }}
+      //     style={styles.webViewContentController}
+      //     javascriptEnabled={true}
+      //     domStorageEnabled={true}
+      //     decelerationRate="normal"
+      //     onNavigationStateChange={this.onNavigationStateChange}
+      //     onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
+      //     startInLoadingState={true}
+      //     scalesPageToFit={true}
+      //     style={{ height: 320, width: 320 }}
+      //   />
+      //   <View style={styles.webViewFooterContainer}>
+      //     <TouchableOpacity onPress={this.goBack}>
+      //       <MaterialIcons
+      //         name="navigate-before"
+      //         style={
+      //           this.state.backButtonEnabled
+      //             ? styles.navButton
+      //             : styles.disabledButton
+      //         }
+      //       />
+      //     </TouchableOpacity>
+      //     <TouchableOpacity onPress={this.goForward}>
+      //       <MaterialIcons
+      //         name="navigate-next"
+      //         style={
+      //           this.state.forwardButtonEnabled
+      //             ? styles.navButton
+      //             : styles.disabledButton
+      //         }
+      //       />
+      //     </TouchableOpacity>
+      //   </View>
+      // </View>
     );
   }
 

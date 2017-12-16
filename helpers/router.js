@@ -13,6 +13,7 @@ import EventList from '../screens/EventList';
 import WebBrowser from '../screens/WebBrowser';
 
 import colors from '../helpers/colors';
+import { sayHello } from '../helpers/common';
 import params from '../helpers/params';
 import styles from '../helpers/styles';
 
@@ -81,9 +82,7 @@ export const EventStack = StackNavigator(
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerRight: (
-          <TouchableOpacity
-            onPress={() => this.getURLAndCallWebBrowser('setlist')}
-          >
+          <TouchableOpacity onPress={() => sayHello()}>
             <Text style={{ color: 'white', paddingRight: 16 }}>Setlist</Text>
           </TouchableOpacity>
           // <Button
@@ -103,12 +102,31 @@ export const EventStack = StackNavigator(
       headerTitleAllowFontScaling: false
     },
     WebBrowser: {
-      screen: WebBrowser,
+      //      screen: WebBrowser,
+      screen: ({ navigation, props }) => (
+        <WebBrowser {...props} target={`${navigation.state.params.target}`} />
+      ),
       navigationOptions: ({ navigation }) => ({
-        // title: `${navigation.state.params.event.title}}`
-        title: 'WebBrowser'
+        title: `${navigation.state.params.targetTitle}`,
+        // title: `${this.props.targetTitle}`,
+        headerTintColor: colors.APP_TEXT_COLOR,
+        headerStyle: styles.navBar,
+        headerTitleStyle: styles.navBarTextStyle,
+        headerTitleAllowFontScaling: false
       })
     }
+    // WebBrowser: {
+    //   screen: WebBrowser,
+    //   navigationOptions: ({ navigation }) => ({
+    //     // title: `${navigation.state.params.event.title}}`
+    //     title: `${this.props.navigation.targetTitle}`,
+    //     headerTintColor: colors.APP_TEXT_COLOR,
+    //     headerStyle: styles.navBar,
+    //     headerTitleStyle: styles.navBarTextStyle,
+    //     headerTitleAllowFontScaling: false
+    //   }),
+    //   target: this.props.navigation.target
+    // }
   },
   {
     headerMode: 'screen'
