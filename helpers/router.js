@@ -1,7 +1,9 @@
 import React from 'react';
 import { Alert, Platform, Text, TouchableOpacity } from 'react-native';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+//import { Icon } from 'react-native-elements';
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import Feed from '../screens/Feed';
 import Settings from '../screens/Settings';
@@ -24,16 +26,17 @@ export const MainScreenNavigator = TabNavigator(
       navigationOptions: {
         tabBarLabel: 'List',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="list" size={35} color={tintColor} />
+          <MaterialIcons name="list" size={25} color={tintColor} />
         )
       }
     },
     Me: {
       screen: Me,
       navigationOptions: {
-        tabBarLabel: 'Me',
+        tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="account-circle" size={35} color={tintColor} />
+          // <Icon name="account-circle" size={35} color={tintColor} />
+          <MaterialIcons name="map" size={25} color={tintColor} />
         )
       }
     }
@@ -48,7 +51,9 @@ export const MainScreenNavigator = TabNavigator(
       indicatorStyle: {
         backgroundColor: colors.APP_TEXT_COLOR
       },
-
+      showIcon: true,
+      showLabel: false,
+      // tabStyle: { padding: 0 },
       allowFontScaling: false
     }
     //   tabBarComponent: TabBarBottom,
