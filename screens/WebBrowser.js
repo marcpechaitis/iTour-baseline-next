@@ -1,10 +1,18 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Platform, Text, TouchableOpacity, View, WebView } from 'react-native';
+import {
+  BackHandler,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+  WebView
+} from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import params from '../helpers/params';
 import styles from '../helpers/styles';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const WEBVIEW_REF = 'webview';
@@ -14,7 +22,9 @@ const DEFAULT_URL = params.BAND_URL_DEFAULT;
 class WebBrowser extends Component {
   constructor(props) {
     super(props);
-    console.log('URL: ' + this.props.target);
+
+    // this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+
     this.state = {
       title: '',
       url: DEFAULT_URL,
@@ -29,6 +39,10 @@ class WebBrowser extends Component {
 
   componentWillMount() {
     //    console.log('WebBrowser componentWillMount');
+    // BackHandler.addEventListener(
+    //   'hardwareBackPress',
+    //   this.handleBackButtonClick
+    // );
   }
 
   componentDidMount() {
@@ -38,18 +52,25 @@ class WebBrowser extends Component {
 
   componentWillUnmount() {
     //    console.log('WebBrowser componentWillUnmount');
+    // BackHandler.removeEventListener(
+    //   'hardwareBackPress',
+    //   this.handleBackButtonClick
+    // );
   }
 
-  render() {
-    const tempURL = 'https://google.com';
+  // handleBackButtonClick() {
+  //   Alert.alert('goback');
+  //   //   this.props.navigation.goBack(null);
+  //   this.props.navigation.dispatch(NavigationActions.back());
+  //   return true;
+  // }
 
+  render() {
     return (
       <View style={styles.flexOne}>
         <WebView
           ref={WEBVIEW_REF}
           automaticallyAdjustContentInsets={true}
-          // source={{ uri: this.props.target }}
-          //  source={{ uri: this.props.target }}
           source={{ uri: this.props.target }}
           style={styles.webViewContentController}
           javascriptEnabled={true}

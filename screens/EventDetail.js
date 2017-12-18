@@ -16,6 +16,7 @@ import {
 import styles from '../helpers/styles';
 import colors from '../helpers/colors';
 import params from '../helpers/params';
+import { showWebBrowser } from '../helpers/common';
 // import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import Config from 'react-native-config';
@@ -722,17 +723,18 @@ class EventDetail extends Component {
         targetTitle = params.BAND_NAME;
     }
 
-    this.showWebBrowser(targetURL, targetTitle);
+    // this.showWebBrowser(targetURL, targetTitle);
+    showWebBrowser(this.props.navigation, targetURL, targetTitle);
   }
 
-  showWebBrowser(targetURL, targetTitle) {
-    // Actions.WebBrowser({ target: targetURL, targetTitle: targetTitle });
-    this.props.navigation.navigate('WebBrowser', {
-      target: targetURL,
-      targetTitle: targetTitle
-    });
-    console.log('open WebView');
-  }
+  // showWebBrowser(targetURL, targetTitle) {
+  //   // Actions.WebBrowser({ target: targetURL, targetTitle: targetTitle });
+  //   this.props.navigation.navigate('WebBrowser', {
+  //     target: targetURL,
+  //     targetTitle: targetTitle
+  //   });
+  //   console.log('open WebView');
+  // }
 }
 
 module.exports = EventDetail;

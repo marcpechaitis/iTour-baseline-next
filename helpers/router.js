@@ -13,7 +13,7 @@ import EventList from '../screens/EventList';
 import WebBrowser from '../screens/WebBrowser';
 
 import colors from '../helpers/colors';
-import { sayHello } from '../helpers/common';
+import { showWebBrowser } from '../helpers/common';
 import params from '../helpers/params';
 import styles from '../helpers/styles';
 
@@ -82,7 +82,15 @@ export const EventStack = StackNavigator(
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerRight: (
-          <TouchableOpacity onPress={() => sayHello()}>
+          <TouchableOpacity
+            onPress={() =>
+              showWebBrowser(
+                navigation,
+                navigation.state.params.event.setlistURL,
+                params.SETLIST_TITLE
+              )
+            }
+          >
             <Text style={{ color: 'white', paddingRight: 16 }}>Setlist</Text>
           </TouchableOpacity>
           // <Button
