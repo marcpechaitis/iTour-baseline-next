@@ -6,7 +6,7 @@ import {
   AppState,
   AsyncStorage,
   Image,
-  Linking,
+  // Linking,
   Platform,
   Text,
   TouchableHighlight,
@@ -16,7 +16,7 @@ import {
 import styles from '../helpers/styles';
 import colors from '../helpers/colors';
 import params from '../helpers/params';
-import { showWebBrowser } from '../helpers/common';
+import { launchURL, showWebBrowser } from '../helpers/common';
 // import { Actions } from 'react-native-router-flux';
 import ActionButton from 'react-native-action-button';
 import Config from 'react-native-config';
@@ -621,47 +621,47 @@ class EventDetail extends Component {
       value: 0,
     });
     const phoneURL = 'tel:' + phoneNbrToCall;
-    this.LaunchURL(phoneURL);
+    launchURL(phoneURL);
   }
 
-  LaunchURL(url) {
-    Linking.canOpenURL(url)
-      .then(supported => {
-        if (!supported) {
-          console.log("Can't handle url: " + url);
-        } else {
-          return Linking.openURL(url);
-        }
-      })
-      .catch(error => console.log('An unexpected error happened', error));
-  }
+  // LaunchURL(url) {
+  //   Linking.canOpenURL(url)
+  //     .then(supported => {
+  //       if (!supported) {
+  //         console.log("Can't handle url: " + url);
+  //       } else {
+  //         return Linking.openURL(url);
+  //       }
+  //     })
+  //     .catch(error => console.log('An unexpected error happened', error));
+  // }
 
-  openMapAtEventLocation() {
-    GoogleAnalytics.trackEvent('Map', 'venue', {
-      label:
-        this.props.navigation.state.params.event.YYYYMMDD +
-        ' ' +
-        this.props.navigation.state.params.event.altName,
-      value: 0,
-    });
-    if (
-      this.props.navigation.state.params.event.lat !== null &&
-      this.props.navigation.state.params.event.lng !== null
-    ) {
-      let mapsURL = 'http://maps.apple.com/?ll=';
-      mapsURL =
-        mapsURL +
-        this.props.navigation.state.params.event.lat +
-        ',' +
-        this.props.navigation.state.params.event.lng;
-      mapsURL =
-        mapsURL + '&q=' + this.props.navigation.state.params.event.venue;
+  // openMapAtEventLocation() {
+  //   GoogleAnalytics.trackEvent('Map', 'venue', {
+  //     label:
+  //       this.props.navigation.state.params.event.YYYYMMDD +
+  //       ' ' +
+  //       this.props.navigation.state.params.event.altName,
+  //     value: 0,
+  //   });
+  //   if (
+  //     this.props.navigation.state.params.event.lat !== null &&
+  //     this.props.navigation.state.params.event.lng !== null
+  //   ) {
+  //     let mapsURL = 'http://maps.apple.com/?ll=';
+  //     mapsURL =
+  //       mapsURL +
+  //       this.props.navigation.state.params.event.lat +
+  //       ',' +
+  //       this.props.navigation.state.params.event.lng;
+  //     mapsURL =
+  //       mapsURL + '&q=' + this.props.navigation.state.params.event.venue;
 
-      this.LaunchURL(mapsURL);
-    } else {
-      this.getEventLocation();
-    }
-  }
+  //     launchURL(mapsURL);
+  //   } else {
+  //     this.getEventLocation();
+  //   }
+  // }
 
   getURLAndCallWebBrowser(targetType) {
     let targetURL = params.BAND_URL_DEFAULT;
