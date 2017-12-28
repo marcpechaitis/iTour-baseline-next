@@ -249,6 +249,7 @@ class EventDetail extends Component {
   render() {
     //  event = this.props.navigation.state.params.event;
     event = this.props.navigation.state.params.event;
+    console.log('BEFORE LAT/LNG: ' + event.lat + ' ' + event.lng);
     if (this.state.isLoadingGeocodeData) {
       return this.renderLoadingView();
     } else {
@@ -438,27 +439,27 @@ class EventDetail extends Component {
                 }
               })()}
               <View>
-                <WeatherWidget event={this.state.theEvent} />
+                <WeatherWidget
+                  event={this.state.theEvent}
+                  navigation={this.props.navigation}
+                />
               </View>
               <CountdownWidget event={this.state.theEvent} />
             </View>
 
-            <TouchableHighlight
+            {/* <TouchableHighlight
               onPress={() => this.openMapAtEventLocation()}
               underlayColor={colors.PRIMARY_COLOR}
-            >
-              <View style={[styles.infoContainer, styles.mapInfoContainer]}>
-                <MapImageWidget event={this.state.theEvent} />
-                <View
-                  style={[
-                    styles.infoContainer,
-                    styles.placePictureInfoContainer
-                  ]}
-                >
-                  {/* <PlacesWidget event={this.state.theEvent} /> */}
-                </View>
+            > */}
+            <View style={[styles.infoContainer, styles.mapInfoContainer]}>
+              <MapImageWidget event={this.state.theEvent} />
+              <View
+                style={[styles.infoContainer, styles.placePictureInfoContainer]}
+              >
+                {/* <PlacesWidget event={this.state.theEvent} /> */}
               </View>
-            </TouchableHighlight>
+            </View>
+            {/* </TouchableHighlight> */}
             <ActionButton
               buttonColor={colors.PRIMARY_COLOR}
               backdrop={<View style={styles.actionButtonBackground} />}

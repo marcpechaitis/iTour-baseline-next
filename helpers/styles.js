@@ -2,7 +2,7 @@ import React, {
   StyleSheet,
   Dimensions,
   PixelRatio,
-  Platform
+  Platform,
 } from 'react-native';
 import colors from './colors';
 const { width, height, scale } = Dimensions.get('window'),
@@ -31,7 +31,7 @@ function randomColor() {
 const styles = StyleSheet.create({
   appContainer: {
     //   height: 100 * vh,
-    backgroundColor: colors.PRIMARY_COLOR
+    backgroundColor: colors.PRIMARY_COLOR,
   },
   headerContainer: {
     // height: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   /* Navigation Bar */
   navBar: {
     backgroundColor: colors.PRIMARY_COLOR,
-    shadowColor: 'transparent'
+    shadowColor: 'transparent',
     // height: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
     // paddingTop: Platform.OS === 'ios' ? iPhonePaddingTop : 54
     // //  alignSelf: (Platform.OS === 'ios' ) ? 'center' : 'flex-start'
@@ -55,19 +55,19 @@ const styles = StyleSheet.create({
     color: colors.APP_TEXT_COLOR,
     // textAlign: Platform.OS === 'ios' ? 'center' : 'left',
     // width: 100 * vw,
-    fontSize: 6 * vw
+    fontSize: 6 * vw,
     // paddingLeft: Platform.OS === 'ios' ? 0 : 30,
     // paddingTop: Platform.OS === 'ios' ? -3 : -4
     // //    textAlign: (Platform.OS === 'ios') ? 'center' : 'left',
   },
   appTextColor: {
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   barButtonTextStyle: {
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   barButtonIconStyle: {
-    tintColor: colors.APP_TEXT_COLOR
+    tintColor: colors.APP_TEXT_COLOR,
   },
   /* Loading Page */
   loadingContainer: {
@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     width: 100 * vw,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.SECONDARY_BG_COLOR
+    backgroundColor: colors.SECONDARY_BG_COLOR,
   },
   loading: {
     marginTop: 1 * vw,
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   /* Event List */
   listContentContainer: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     //        paddingTop: 1*vw,
     //        paddingTop: (Platform.OS === 'ios' ? 64 : 50),
     //        backgroundColor: '#006bb1'
-    backgroundColor: colors.SECONDARY_BG_COLOR
+    backgroundColor: colors.SECONDARY_BG_COLOR,
     //        backgroundColor: colors.SECONDARY_COLOR
     //        backgroundColor: randomColor()
     //        shadowColor: colors.PRIMARY_BG_COLOR
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: colors.SECONDARY_BG_COLOR,
     //   marginTop: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
-    paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh
+    paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh,
   },
   rowContainer: {
     flexDirection: 'column',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     padding: 2 * vw,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: colors.PRIMARY_BG_COLOR
+    backgroundColor: colors.PRIMARY_BG_COLOR,
     /*    shadowColor: 'rgba(255,255,255,0.2)',
     shadowOpacity: .6,
     shadowOffset: {height: 2, width: 2},
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   theRow1: {
     //        backgroundColor: 'black',
     //        width: Dimensions.get('window').width
-    width: 92 * vw
+    width: 92 * vw,
     //    flex:1
   },
   theRow2: {
@@ -140,62 +140,63 @@ const styles = StyleSheet.create({
     //        backgroundColor: 'yellow',
     alignItems: 'center',
     //        width: Dimensions.get('window').width
-    width: 92 * vw
+    width: 92 * vw,
     // flex: 1
   },
   venueContainer: {
     flexWrap: 'wrap',
-    width: 92 * vw
+    width: 92 * vw,
   },
   venue: {
     fontSize: 5.5 * vw,
     //    marginBottom: 1*vh,
     //    fontWeight: 'bold',
     textAlign: 'left',
-    color: colors.PRIMARY_COLOR === '#000000' ? '#FFFFFF' : colors.PRIMARY_COLOR
+    color:
+      colors.PRIMARY_COLOR === '#000000' ? '#FFFFFF' : colors.PRIMARY_COLOR,
   },
   dateContainer: {
     flexDirection: 'row',
     width: 27 * vw,
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
     // flex: 1
   },
   date: {
     fontSize: 12 * vw,
     marginTop: Platform.OS === 'ios' ? 0 * vh : -1.5 * vh,
     textAlign: 'left',
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   detailsContainer: {
     flex: 1,
     flexWrap: 'wrap',
     alignItems: 'flex-end',
-    width: 62 * vw
+    width: 62 * vw,
   },
   locationContainer: {
     paddingLeft: 2 * vw,
     paddingRight: 2 * vw,
-    width: 62 * vw
+    width: 62 * vw,
     // flex: 1
   },
   location: {
     fontSize: 5 * vw,
     textAlign: 'right',
-    color: colors.PRIMARY_COLOR
+    color: colors.PRIMARY_COLOR,
   },
   street: {
     marginTop: Platform.OS === 'ios' ? 1 * vh : 0 * vh,
     fontSize: 4 * vw,
     textAlign: 'right',
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   cityState: {
     fontSize: 4 * vw,
     textAlign: 'right',
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   separator: {
-    backgroundColor: colors.SECONDARY_BG_COLOR
+    backgroundColor: colors.SECONDARY_BG_COLOR,
   },
   /* Event Detail */
   contentContainer: {
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     // marginTop: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
     // paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh,
     position: 'relative',
-    backgroundColor: colors.SECONDARY_BG_COLOR
+    backgroundColor: colors.SECONDARY_BG_COLOR,
   },
   // container: {
   //   marginTop: 1.5 * vw,
@@ -214,12 +215,12 @@ const styles = StyleSheet.create({
     //    position: 'relative',
     //    flex: 1,
     width: 96 * vw,
-    marginTop: 1 * vw,
+    marginTop: 2 * vw,
     marginLeft: 2 * vw,
     marginRight: 2 * vw,
-    marginBottom: 1 * vw,
+    marginBottom: 0 * vw,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
     /*    shadowColor: 'rgba(255,255,255,0.2)',
     shadowOpacity: .6,
     shadowOffset: {height: 2, width: 2},
@@ -235,30 +236,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 32 * vh,
     backgroundColor: colors.PRIMARY_BG_COLOR,
-    paddingTop: 1 * vw,
-    paddingBottom: 1 * vw
+    // paddingTop: 1 * vw,
+    // paddingBottom: 1 * vw
   },
   extraInfoContainer: {
     //   flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
     height: 10 * vh,
     paddingLeft: 1 * vw,
     paddingRight: 1 * vw,
+    // marginBottom: 1 * vw,
     //    paddingBottom: 1*vw,
-    marginBottom: Platform.OS === 'ios' ? 4 * vw : 2 * vw,
-    backgroundColor: colors.PRIMARY_BG_COLOR
+    // marginBottom: Platform.OS === 'ios' ? 4 * vw : 2 * vw,
+    backgroundColor: colors.PRIMARY_BG_COLOR,
   },
   mapInfoContainer: {
     //    flex: 1,
-    height: 46 * vh,
+    height: Platform.OS === 'ios' ? 46 * vh : 42 * vh,
     width: 100 * vw,
-    marginTop: Platform.OS === 'ios' ? 4 * vw : 0 * vw,
+    // paddingTop: 1 * vw,
+    // marginTop: Platform.OS === 'ios' ? -1 * vh : 0 * vh,
     marginLeft: 0,
     marginRight: 0,
     marginBottom: 0,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   placePictureInfoContainer: {
     position: 'relative',
@@ -266,14 +269,14 @@ const styles = StyleSheet.create({
     height: 20 * vw,
     width: 30 * vw,
     left: 4 * vw,
-    bottom: isIphoneX() ? 22.5 * vw : 16 * vw
+    bottom: isIphoneX() ? 22.5 * vw : 16 * vw,
   },
   placePictureModal: {
     backgroundColor: colors.MODAL_BACKGROUND,
     alignItems: 'center',
     height: 100 * vh,
     width: 100 * vw,
-    paddingTop: 20 * vh
+    paddingTop: 20 * vh,
   },
   /* WebBrowser */
   webViewContentController: {
@@ -290,21 +293,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.PRIMARY_COLOR,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   navButton: {
     color: colors.APP_TEXT_COLOR,
-    fontSize: 8 * vw
+    fontSize: 8 * vw,
   },
   disabledButton: {
     color: colors.DISABLED_WASH,
-    fontSize: 8 * vw
+    fontSize: 8 * vw,
   },
   fullScreenWidth: {
-    width: 100 * vw
+    width: 100 * vw,
   },
   placePhotoHeight: {
-    height: 46 * vh
+    height: 46 * vh,
   },
   //  text: {
   //    color: colors.APP_TEXT_COLOR
@@ -312,25 +315,25 @@ const styles = StyleSheet.create({
   overlayText: {
     backgroundColor: colors.PRIMARY_BG_COLOR,
     paddingLeft: 5,
-    paddingRight: 5
+    paddingRight: 5,
   },
   altName: {
     //  flex: 0,
     //   position: 'relative',
     fontSize: 12 * vw,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   notes: {
     // flex: 1,
     position: 'relative',
-    fontSize: 4 * vw
+    fontSize: 4 * vw,
     //  paddingTop: 1*vh,
     //  backgroundColor: 'red'
   },
   eventTimes: {
     //   flex: 1,
     position: 'relative',
-    fontSize: 4 * vw
+    fontSize: 4 * vw,
     //  paddingTop: 1*vh,
     //  backgroundColor: 'blue'
   },
@@ -341,29 +344,30 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     width: 96 * vw,
     paddingLeft: 2 * vw,
-    paddingRight: 2 * vw
+    paddingRight: 2 * vw,
   },
   venueDetail: {
     fontSize: 5 * vw,
     //    fontWeight: 'bold',
     textAlign: 'right',
-    color: colors.PRIMARY_COLOR === '#000000' ? '#FFFFFF' : colors.PRIMARY_COLOR
+    color:
+      colors.PRIMARY_COLOR === '#000000' ? '#FFFFFF' : colors.PRIMARY_COLOR,
   },
   address: {
     fontSize: 4 * vw,
     //  marginTop: .5*vw,
-    textAlign: 'right'
+    textAlign: 'right',
   },
   phoneContainer: {
     paddingLeft: 10,
     paddingRight: 10,
     width: 96 * vw,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   phone: {
     fontSize: 3 * vw,
     marginTop: 0.5 * vw,
-    textAlign: 'right'
+    textAlign: 'right',
   },
   /*  mapContainer: {
     width: 96*vw,
@@ -387,94 +391,99 @@ const styles = StyleSheet.create({
 }, */
   icon: {
     width: 290,
-    height: 163
+    height: 163,
   },
   map: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   actionButtonIcon: {
     fontSize: 30,
     height: 30,
-    color: colors.PRIMARY_COLOR
+    color: colors.PRIMARY_COLOR,
   },
   actionButtonImage: {
     width: 5 * vh,
-    height: 5 * vh
+    height: 5 * vh,
   },
   barButtonTextStyle: {
-    color: colors.APP_TEXT_COLOR
+    color: colors.APP_TEXT_COLOR,
   },
   actionButtonBackground: {
     width: width,
     height: height,
-    backgroundColor: colors.MODAL_BACKGROUND
+    backgroundColor: colors.MODAL_BACKGROUND,
   },
 
   /* WeatherWidget */
   widgetContainer: {
     //    maxWidth: 30 * vw,
-    width: 27 * vw,
+    width: 24 * vw,
     // flex: 0.3,
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 1 * vw
+    padding: 1 * vw,
   },
   weatherWidgetContainer: {
     // maxWidth: 40 * vw,
-    width: 38 * vw,
+    width: 44 * vw,
     // flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 1 * vw
+    paddingTop: 1 * vw,
+    paddingBottom: 1 * vw,
+    // flexGrow: 1
   },
   weatherIcon: {
     fontSize: 7.5 * vw,
     paddingRight: 2 * vw,
-    paddingTop: 3
+    paddingTop: 3,
   },
   weatherDetails: {
     fontSize: 7.5 * vw,
-    paddingRight: 0.5 * vw,
-    marginRight: 0.5 * vw
+    //  paddingRight: 0.5 * vw,
+    marginRight: 0.5 * vw,
     //    paddingRight: 1 * vw
   },
+  weatherMaxMin: {
+    paddingLeft: 2 * vw,
+  },
   directionColumnContainer: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   directionRowContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   fontSize1: {
-    fontSize: 1 * vw
+    fontSize: 1 * vw,
   },
   fontSize2: {
-    fontSize: 2 * vw
+    fontSize: 2 * vw,
   },
   fontSize3: {
-    fontSize: 3 * vw
+    fontSize: 3 * vw,
   },
   fontSize4: {
-    fontSize: 4 * vw
+    fontSize: 4 * vw,
   },
   fontSize4: {
-    fontSize: 4 * vw
+    fontSize: 4 * vw,
   },
   centerText: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   alignItemsCenter: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   justifySpaceAround: {
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   flexOne: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 module.exports = styles;

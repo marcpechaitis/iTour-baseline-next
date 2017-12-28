@@ -3732,6 +3732,10 @@ react-native-google-analytics-bridge@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.4.1.tgz#fd5dacb86436b7e08f1972a8205229ada2ea2abf"
 
+react-native-maps@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.19.0.tgz#ce94fad1cf360e335cb4338a68c95f791e869074"
+
 react-native-router-flux@^4.0.0-beta.24:
   version "4.0.0-beta.24"
   resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.0-beta.24.tgz#93fb1976688bd6e34f73b2ae6764704efb7bcdd5"

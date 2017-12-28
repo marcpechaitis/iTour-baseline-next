@@ -8,6 +8,7 @@ import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -38,7 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
             new GoogleAnalyticsBridgePackage(),
             new ReactNativeConfigPackage(),
             new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new MapsPackage()
       );
     }
 

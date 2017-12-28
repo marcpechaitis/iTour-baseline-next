@@ -12,6 +12,7 @@ import Me from '../screens/Me';
 
 import EventDetail from '../screens/EventDetail';
 import EventList from '../screens/EventList';
+import EventMap from '../screens/EventMap';
 import WebBrowser from '../screens/WebBrowser';
 
 import colors from '../helpers/colors';
@@ -31,7 +32,7 @@ export const MainScreenNavigator = TabNavigator(
       }
     },
     Me: {
-      screen: Me,
+      screen: EventMap,
       navigationOptions: {
         tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor }) => (
@@ -84,6 +85,7 @@ export const EventStack = StackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.state.params.event.title}`,
         headerTintColor: colors.APP_TEXT_COLOR,
+        headerBackTitle: null,
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerRight: (

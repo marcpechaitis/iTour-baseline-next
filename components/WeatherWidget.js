@@ -6,9 +6,10 @@ import {
   Alert,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from 'react-native';
 import colors from '../helpers/colors';
+import { showWebBrowser } from '../helpers/common';
 import params from '../helpers/params';
 import styles from '../helpers/styles';
 import { Actions } from 'react-native-router-flux';
@@ -22,12 +23,9 @@ class WeatherWidget extends Component {
   constructor(props) {
     super(props);
 
-    //    const WEATHER_CURRENT_URL = 'https://api.darksky.net/forecast/' + Config.DARKSKY_API_KEY + '/' + this.props.event.lat + ',' + this.props.event.lng;
-
     this.state = {
       isLoadingCurrent: true,
       isError: false,
-      //      weatherCurrentURL: WEATHER_CURRENT_URL,
       weatherCurrentData: null,
       colorBackground: colors.PRIMARY_BG_COLOR,
       colorFont: colors.APP_TEXT_COLOR,
@@ -38,7 +36,7 @@ class WeatherWidget extends Component {
       currentTemp: 0,
       currentMax: 0,
       currentMin: 0,
-      lastPress: 0
+      lastPress: 0,
     };
   }
 
@@ -60,18 +58,18 @@ class WeatherWidget extends Component {
 
     try {
       let response = await fetch(WEATHER_CURRENT_URL);
-      //      console.log('fetch weather status: ' + response.status);
+
       if (response.status === 200) {
         let responseJson = await response.json();
         this.setState({
           isLoadingCurrent: false,
-          weatherCurrentData: responseJson
+          weatherCurrentData: responseJson,
         });
         this.doWeatherStyling();
       } else {
         this.setState({
           isLoadingCurrent: false,
-          isError: true
+          isError: true,
         });
       }
     } catch (error) {
@@ -79,7 +77,7 @@ class WeatherWidget extends Component {
       GoogleAnalytics.trackException(error.message, false);
       this.setState({
         isLoadingCurrent: false,
-        isError: true
+        isError: true,
       });
     }
   }
@@ -102,52 +100,53 @@ class WeatherWidget extends Component {
             onLongPress={() => this.switchUnits()}
             underlayColor={colors.PRIMARY_COLOR}
           >
-            <View
-              style={[
-                styles.weatherWidgetContainer,
-                { backgroundColor: this.state.colorBackground }
-              ]}
-            >
+            <View style={styles.weatherWidgetContainer}>
               <View style={styles.directionColumnContainer}>
-                <View style={styles.directionRowContainer}>
-                  <Meteocon
-                    name={this.state.iconName}
-                    style={[
-                      { color: colors.APP_TEXT_COLOR },
-                      styles.weatherIcon
-                    ]}
-                    allowFontScaling={false}
-                  />
-                  <Text
-                    style={[
-                      { color: this.state.colorFont },
-                      styles.weatherDetails
-                    ]}
-                    allowFontScaling={false}
-                  >
-                    {Math.round(this.state.currentTemp)}°{this.state.unitType}
-                  </Text>
-                  <View style={styles.directionColumnContainer}>
+                <View style={[styles.directionRowContainer]}>
+                  <View>
+                    <Meteocon
+                      name={this.state.iconName}
+                      style={[
+                        { color: colors.APP_TEXT_COLOR },
+                        styles.weatherIcon,
+                      ]}
+                      allowFontScaling={false}
+                    />
+                  </View>
+                  <View>
                     <Text
                       style={[
-                        { color: this.state.colorFontMax },
-                        styles.fontSize4
+                        { color: this.state.colorFont },
+                        styles.weatherDetails,
                       ]}
                       allowFontScaling={false}
                     >
-                      {Math.round(this.state.currentMax)}°
+                      {Math.round(this.state.currentTemp)}°{this.state.unitType}
                     </Text>
-                    <Text
-                      style={[
-                        {
-                          color: this.state.colorFontMin
-                        },
-                        styles.fontSize4
-                      ]}
-                      allowFontScaling={false}
-                    >
-                      {Math.round(this.state.currentMin)}°
-                    </Text>
+                  </View>
+                  <View style={styles.weatherMaxMin}>
+                    <View style={styles.directionColumnContainer}>
+                      <Text
+                        style={[
+                          { color: this.state.colorFontMax },
+                          styles.fontSize4,
+                        ]}
+                        allowFontScaling={false}
+                      >
+                        {Math.round(this.state.currentMax)}°
+                      </Text>
+                      <Text
+                        style={[
+                          {
+                            color: this.state.colorFontMin,
+                          },
+                          styles.fontSize4,
+                        ]}
+                        allowFontScaling={false}
+                      >
+                        {Math.round(this.state.currentMin)}°
+                      </Text>
+                    </View>
                   </View>
                 </View>
                 <View>
@@ -155,10 +154,10 @@ class WeatherWidget extends Component {
                     style={[
                       {
                         color: colors.APP_TEXT_COLOR,
-                        paddingTop: 1
+                        paddingTop: 1,
                       },
                       styles.fontSize2,
-                      styles.centerText
+                      styles.centerText,
                     ]}
                   >
                     Powered by Dark Sky
@@ -209,12 +208,10 @@ class WeatherWidget extends Component {
     let targetTitle = params.WEATHER_TITLE;
     GoogleAnalytics.trackEvent('WebView', 'weather', {
       label: this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
-      value: 0
+      value: 0,
     });
-    Actions.WebBrowser({
-      target: targetURL,
-      targetTitle: targetTitle
-    });
+
+    showWebBrowser(this.props.navigation, targetURL, targetTitle);
   }
   switchUnits() {
     /* method called when user Long Presses the widget.  Switches from F to C, and vice-versa */ if (
@@ -224,14 +221,14 @@ class WeatherWidget extends Component {
         unitType: 'C',
         currentTemp: (this.state.currentTemp - 32) / 1.8,
         currentMax: (this.state.currentMax - 32) / 1.8,
-        currentMin: (this.state.currentMin - 32) / 1.8
+        currentMin: (this.state.currentMin - 32) / 1.8,
       });
     } else {
       this.setState({
         unitType: 'F',
         currentTemp: this.state.currentTemp * 1.8 + 32,
         currentMax: this.state.currentMax * 1.8 + 32,
-        currentMin: this.state.currentMin * 1.8 + 32
+        currentMin: this.state.currentMin * 1.8 + 32,
       });
     }
   }
@@ -270,20 +267,15 @@ class WeatherWidget extends Component {
         return '#FECF3B';
         break;
       case temperature >= 60 && temperature < 70:
-        // Use the iTour orange secondary color instead of suggested color // because it looked weird to have two different, but close shades // on the screen at once
         return '#EC9800';
-        //        colorBackground = '#ff9600'; //        colorFont = colors.PRIMARY_BG_COLOR;
         break;
       case temperature >= 70 && temperature < 80:
         return '#DD531E';
         break;
       case temperature >= 80 && temperature < 90:
-        // return '#C53600';
         return '#FF4500';
         break;
       case temperature >= 90 && temperature < 100:
-        // return '#B10909';
-        //     return '#EF4836';
         return '#FF0000';
 
         break;
@@ -304,84 +296,9 @@ class WeatherWidget extends Component {
     let units = this.state.weatherCurrentData.flags.units;
     let colorBackground = colors.PRIMARY_BG_COLOR;
     let { colorFont, colorFontMax, colorFontMin } = colors.APP_TEXT_COLOR;
-    /* if units are not US, convert to centigrade */
-
-    // this.setState({
-    //   unitType: units !== 'us' ? 'C' : 'F',
-    //   currentTemp: this.state.weatherCurrentData.currently.temperature,
-    //   currentMax: this.state.weatherCurrentData.daily.data[0].temperatureMax,
-    //   currentMin: this.state.weatherCurrentData.daily.data[0].temperatureMin
-    // });
-
-    // colorFont = this.getTemperatureColor(
-    //   this.state.weatherCurrentData.currently.temperature
-    // );
-    // console.log(colorFont);
-    // colorFontMax = this.getTemperatureColor(
-    //   this.state.weatherCurrentData.daily.data[0].temperatureMax
-    // );
-    // colorFontMin = this.getTemperatureColor(
-    //   this.state.weatherCurrentData.daily.data[0].temperatureMin
-    // );
-    // switch (true) {
-    //   case currentTemperature <= -10:
-    //     colorFont = '#ffffff';
-    //     colorFont = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > -10 && currentTemperature <= 0:
-    //     colorFont = '#D1C9DF';
-    //     colorFont = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 0 && currentTemperature <= 10:
-    //     colorFont = '#A496C0';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 10 && currentTemperature <= 20:
-    //     colorFont = '#3993CE';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 20 && currentTemperature <= 30:
-    //     colorFont = '#0772B8';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 30 && currentTemperature <= 40:
-    //     colorFont = '#03902B';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 40 && currentTemperature <= 50:
-    //     colorFont = '#2DC558';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 50 && currentTemperature <= 60:
-    //     colorFont = '#FECF3B';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 60 && currentTemperature <= 70: // Use the iTour orange secondary color instead of suggested color // because it looked weird to have two different, but close shades // on the screen at once
-    //     colorFont = '#EC9800';
-    //     colorBackground = colors.PRIMARY_BG_COLOR; //        colorBackground = '#ff9600'; //        colorFont = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 70 && currentTemperature <= 80:
-    //     colorFont = '#DD531E';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 80 && currentTemperature <= 90:
-    //     colorFont = '#C53600';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 90 && currentTemperature <= 100:
-    //     colorFont = '#B10909';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   case currentTemperature > 100:
-    //     colorFont = '#6F0015';
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    //     break;
-    //   default:
-    //     colorFont = colors.APP_TEXT_COLOR;
-    //     colorBackground = colors.PRIMARY_BG_COLOR;
-    // } /* get icon based on conditions */
     let currentConditionCode = this.state.weatherCurrentData.currently.icon;
     let iconName = 'iconmonstr-weather-2';
+
     switch (currentConditionCode) {
       case 'clear-day':
         iconName = 'iconmonstr-weather-2';
@@ -442,7 +359,7 @@ class WeatherWidget extends Component {
       unitType: units !== 'us' ? 'C' : 'F',
       currentTemp: this.state.weatherCurrentData.currently.temperature,
       currentMax: this.state.weatherCurrentData.daily.data[0].temperatureMax,
-      currentMin: this.state.weatherCurrentData.daily.data[0].temperatureMin
+      currentMin: this.state.weatherCurrentData.daily.data[0].temperatureMin,
     });
   }
 }
