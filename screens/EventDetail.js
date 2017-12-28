@@ -49,12 +49,10 @@ class EventDetail extends Component {
 
     if (Platform.OS === 'ios' && Dimensions.get('window').height === 812) {
       IphoneXBottomOffset = 80;
-    } else {
-      console.log('ho ho');
     }
 
     this.state = {
-      isLoadingGeocodeData: true,
+      isLoadingGeocodeData: false,
       LoadingText: 'Loading Show...',
       isError: false,
       theEvent: event,
@@ -79,7 +77,8 @@ class EventDetail extends Component {
     };
     this.props.navigation.setParams(params);
     GoogleAnalytics.trackScreenView(event.YYYYMMDD + ' ' + event.altName);
-
+    console.log(event.YYYYMMDD);
+    // TODO decide how to handle!
     this.getEventLocation();
   }
 

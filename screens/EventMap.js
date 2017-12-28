@@ -16,18 +16,15 @@ const styles = StyleSheet.create({
     height: height,
     width: width,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   map: {
-    ...StyleSheet.absoluteFillObject
-  }
+    ...StyleSheet.absoluteFillObject,
+  },
 });
 
 export default class EventMap extends Component<{}> {
   render() {
-    const { region } = this.props;
-    console.log(region);
-
     return (
       <View style={styles.container}>
         <MapView
@@ -36,7 +33,7 @@ export default class EventMap extends Component<{}> {
             latitude: 37.78825,
             longitude: -122.4324,
             latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
+            longitudeDelta: 0.0121,
           }}
         />
       </View>
