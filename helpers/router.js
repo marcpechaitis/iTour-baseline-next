@@ -28,8 +28,8 @@ export const MainScreenNavigator = TabNavigator(
         tabBarLabel: 'List',
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons name="list" size={25} color={tintColor} />
-        )
-      }
+        ),
+      },
     },
     Me: {
       screen: EventMap,
@@ -38,25 +38,25 @@ export const MainScreenNavigator = TabNavigator(
         tabBarIcon: ({ tintColor }) => (
           // <Icon name="account-circle" size={35} color={tintColor} />
           <MaterialIcons name="map" size={25} color={tintColor} />
-        )
-      }
-    }
+        ),
+      },
+    },
   },
   {
     tabBarOptions: {
       activeTintColor: colors.APP_TEXT_COLOR,
       inactiveTintColor: colors.DISABLED_WASH,
       style: {
-        backgroundColor: colors.PRIMARY_BG_COLOR
+        backgroundColor: colors.PRIMARY_BG_COLOR,
       },
       indicatorStyle: {
-        backgroundColor: colors.APP_TEXT_COLOR
+        backgroundColor: colors.APP_TEXT_COLOR,
       },
       showIcon: true,
       showLabel: false,
       // tabStyle: { padding: 0 },
-      allowFontScaling: false
-    }
+      allowFontScaling: false,
+    },
     //   tabBarComponent: TabBarBottom,
     //   tabBarPosition: 'bottom'
   }
@@ -68,17 +68,20 @@ export const EventStack = StackNavigator(
       screen: MainScreenNavigator,
       navigationOptions: {
         title: params.APP_NAME,
+        subTitle: 'bingo',
+
         headerTintColor: 'white',
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
         headerBackTitleStyle: styles.navBarTextStyle,
+        headerTitleAllowFontScaling: false,
         headerBackTitle: null,
         shadowColor: 'transparent',
         backgroundColor: 'transparent',
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
       },
 
-      headerTitleAllowFontScaling: false
+      headerTitleAllowFontScaling: false,
     },
     EventDetail: {
       screen: EventDetail,
@@ -88,6 +91,7 @@ export const EventStack = StackNavigator(
         headerBackTitle: null,
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
+        headerTitleAllowFontScaling: false,
         headerRight: (
           <TouchableOpacity
             onPress={() =>
@@ -110,11 +114,10 @@ export const EventStack = StackNavigator(
           //   }
           //   onPress={() => Alert.alert('Setlist')}
           // />
-        )
+        ),
         //  headerBackTitleStyle: styles.navBarTextStyle
         // title: 'bingo'
       }),
-      headerTitleAllowFontScaling: false
     },
     WebBrowser: {
       //      screen: WebBrowser,
@@ -125,11 +128,13 @@ export const EventStack = StackNavigator(
         title: `${navigation.state.params.targetTitle}`,
         // title: `${this.props.targetTitle}`,
         headerTintColor: colors.APP_TEXT_COLOR,
+        headerBackTitle: null,
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
-        headerTitleAllowFontScaling: false
-      })
-    }
+        headerTitleAllowFontScaling: false,
+        headerRight: null,
+      }),
+    },
     // WebBrowser: {
     //   screen: WebBrowser,
     //   navigationOptions: ({ navigation }) => ({
@@ -144,7 +149,7 @@ export const EventStack = StackNavigator(
     // }
   },
   {
-    headerMode: 'screen'
+    headerMode: 'screen',
   }
 );
 
@@ -160,14 +165,14 @@ export const EventStack = StackNavigator(
 export const Root = StackNavigator(
   {
     EventStack: {
-      screen: EventStack
-    }
+      screen: EventStack,
+    },
     // Settings: {
     //   screen: SettingsStack
     // }
   },
   {
     //     mode: 'card',
-    headerMode: 'none'
+    headerMode: 'none',
   }
 );

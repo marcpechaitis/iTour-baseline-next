@@ -6,13 +6,16 @@ import {
   Alert,
   Dimensions,
   Image,
+  Linking,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 import colors from '../helpers/colors';
+import { launchURL } from '../helpers/common';
 import styles from '../helpers/styles';
 import Config from 'react-native-config';
+import GoogleAnalytics from 'react-native-google-analytics-bridge';
 import MapView from 'react-native-maps';
 
 var event;
@@ -26,16 +29,9 @@ const { width, height, scale } = Dimensions.get('window'),
   vmax = Math.max(vw, vh);
 
 const mapStyles = StyleSheet.create({
-  // container: {
-  //   ...StyleSheet.absoluteFillObject,
-  //   height: 1000,
-  //   width: 400,
-  //   justifyContent: 'flex-end',
-  //   alignItems: 'center'
-  // },
   map: {
-    ...StyleSheet.absoluteFillObject
-  }
+    ...StyleSheet.absoluteFillObject,
+  },
 });
 
 class MapImageWidget extends Component {
@@ -54,6 +50,22 @@ class MapImageWidget extends Component {
 
   componentWillUnmount() {
     //    console.log('MapImageWidget componentWillUnmount');
+  }
+
+  openMapAtEventLocation() {
+    GoogleAnalytics.trackEvent('Map', 'venue', {
+      label: event.YYYYMMDD + ' ' + event.altName,
+      value: 0,
+    });
+    if (event.lat !== null && event.lng !== null) {
+      let mapsURL = 'http://maps.apple.com/?ll=';
+      mapsURL = mapsURL + event.lat + ',' + event.lng;
+      mapsURL = mapsURL + '&q=' + event.venue;
+
+      launchURL(mapsURL);
+    } else {
+      this.getEventLocation();
+    }
   }
 
   render() {
@@ -76,7 +88,7 @@ class MapImageWidget extends Component {
         '+&markers=color:' +
         MARKER_COLOR +
         '|' +
-        event.lat +
+        event.laopenMapAtEventLocationt +
         ',' +
         event.lng;
       GOOGLE_MAP_IMAGE_URL = GOOGLE_MAP_IMAGE_URL + '&scale=2';
@@ -98,17 +110,17 @@ class MapImageWidget extends Component {
             latitude: parseFloat(event.lat),
             longitude: parseFloat(event.lng),
             latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
+            longitudeDelta: 0.0121,
           }}
         >
           <MapView.Marker
             coordinate={{
               latitude: parseFloat(event.lat),
-              longitude: parseFloat(event.lng)
+              longitude: parseFloat(event.lng),
             }}
             title={event.venue}
-            onCalloutPress={() => console.log('Marker Pressed')}
-            description={'Get Directions'}
+            onCalloutPress={() => this.openMapAtEventLocation()}
+            // description={'Get Directions'}
           />
         </MapView>
         // </View>

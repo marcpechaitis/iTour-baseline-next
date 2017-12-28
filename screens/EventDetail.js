@@ -11,7 +11,7 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import styles from '../helpers/styles';
 import colors from '../helpers/colors';
@@ -59,7 +59,7 @@ class EventDetail extends Component {
       geocodeData: null,
       userPosition: null,
       isFindingUser: false,
-      IphoneXBottomOffset: IphoneXBottomOffset
+      IphoneXBottomOffset: IphoneXBottomOffset,
     };
   }
 
@@ -79,7 +79,7 @@ class EventDetail extends Component {
         >
           <Text style={{ color: 'white', paddingRight: 16 }}>Setlist</Text>
         </TouchableOpacity>
-      )
+      ),
     };
     this.props.navigation.setParams(params);
     GoogleAnalytics.trackScreenView(
@@ -147,12 +147,12 @@ class EventDetail extends Component {
             await AsyncStorage.multiSet([
               [
                 this.props.navigation.state.params.event.venue + '.lat',
-                JSON.stringify(responseJson.results[0].geometry.location.lat)
+                JSON.stringify(responseJson.results[0].geometry.location.lat),
               ],
               [
                 this.props.navigation.state.params.event.venue + '.lng',
-                JSON.stringify(responseJson.results[0].geometry.location.lng)
-              ]
+                JSON.stringify(responseJson.results[0].geometry.location.lng),
+              ],
             ]);
             //          console.log(this.props.navigation.state.params.event.venue + ' location saved!');
           } catch (error) {
@@ -168,7 +168,7 @@ class EventDetail extends Component {
           this.setState({
             isLoadingGeocodeData: false,
             theEvent: this.props.navigation.state.params.event,
-            geocodeData: responseJson
+            geocodeData: responseJson,
           });
         } else {
           // Something is wrong and we did not get expected results for the address.  Let's try searching on venue name
@@ -194,14 +194,14 @@ class EventDetail extends Component {
                       this.props.navigation.state.params.event.venue + '.lat',
                       JSON.stringify(
                         responseJson.results[0].geometry.location.lat
-                      )
+                      ),
                     ],
                     [
                       this.props.navigation.state.params.event.venue + '.lng',
                       JSON.stringify(
                         responseJson.results[0].geometry.location.lng
-                      )
-                    ]
+                      ),
+                    ],
                   ]);
                 } catch (error) {
                   // Error saving data
@@ -216,7 +216,7 @@ class EventDetail extends Component {
                 this.setState({
                   isLoadingGeocodeData: false,
                   theEvent: this.props.navigation.state.params.event,
-                  geocodeData: responseJson
+                  geocodeData: responseJson,
                 });
               } else {
                 this.setState({ isLoadingGeocodeData: false, isError: true });
@@ -284,7 +284,7 @@ class EventDetail extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                   width: width,
-                  height: 32 * vh
+                  height: 32 * vh,
                 }}
               >
                 <TouchableHighlight
@@ -296,7 +296,7 @@ class EventDetail extends Component {
                       style={[
                         styles.appTextColor,
                         styles.altName,
-                        styles.overlayText
+                        styles.overlayText,
                       ]}
                     >
                       {altName}
@@ -310,7 +310,7 @@ class EventDetail extends Component {
                         style={[
                           styles.appTextColor,
                           styles.notes,
-                          styles.overlayText
+                          styles.overlayText,
                         ]}
                       >
                         {notes}
@@ -322,7 +322,7 @@ class EventDetail extends Component {
                   style={[
                     styles.appTextColor,
                     styles.eventTimes,
-                    styles.overlayText
+                    styles.overlayText,
                   ]}
                 >
                   {eventTimes}
@@ -337,7 +337,7 @@ class EventDetail extends Component {
                         style={[
                           styles.appTextColor,
                           styles.venueDetail,
-                          styles.overlayText
+                          styles.overlayText,
                         ]}
                       >
                         {venue}
@@ -346,7 +346,7 @@ class EventDetail extends Component {
                         style={[
                           styles.appTextColor,
                           styles.address,
-                          styles.overlayText
+                          styles.overlayText,
                         ]}
                       >
                         {address}
@@ -355,7 +355,7 @@ class EventDetail extends Component {
                         style={[
                           styles.appTextColor,
                           styles.address,
-                          styles.overlayText
+                          styles.overlayText,
                         ]}
                       >
                         {cityStatePostal}
@@ -367,7 +367,7 @@ class EventDetail extends Component {
                               style={[
                                 styles.appTextColor,
                                 styles.address,
-                                styles.overlayText
+                                styles.overlayText,
                               ]}
                             >
                               {country}
@@ -389,7 +389,7 @@ class EventDetail extends Component {
                               style={[
                                 styles.appTextColor,
                                 styles.phone,
-                                styles.overlayText
+                                styles.overlayText,
                               ]}
                             >
                               {phone}
@@ -429,7 +429,7 @@ class EventDetail extends Component {
                         style={[
                           styles.appTextColor,
                           styles.fontSize2,
-                          styles.centerText
+                          styles.centerText,
                         ]}
                       >
                         Finding your location...
@@ -455,9 +455,7 @@ class EventDetail extends Component {
               <MapImageWidget event={this.state.theEvent} />
               <View
                 style={[styles.infoContainer, styles.placePictureInfoContainer]}
-              >
-                {/* <PlacesWidget event={this.state.theEvent} /> */}
-              </View>
+              />
             </View>
             {/* </TouchableHighlight> */}
             <ActionButton
@@ -542,7 +540,7 @@ class EventDetail extends Component {
         this.props.navigation.state.params.event.YYYYMMDD +
         ' ' +
         this.props.navigation.state.params.event.altName,
-      value: 0
+      value: 0,
     });
     //    this.determineLocation();
     if (
@@ -551,7 +549,7 @@ class EventDetail extends Component {
     ) {
       this.setState({
         isFindingUser: true,
-        LoadingText: 'Finding current location...'
+        LoadingText: 'Finding current location...',
       });
       try {
         navigator.geolocation.getCurrentPosition(
@@ -620,7 +618,7 @@ class EventDetail extends Component {
         this.props.navigation.state.params.event.YYYYMMDD +
         ' ' +
         this.props.navigation.state.params.event.altName,
-      value: 0
+      value: 0,
     });
     const phoneURL = 'tel:' + phoneNbrToCall;
     this.LaunchURL(phoneURL);
@@ -644,7 +642,7 @@ class EventDetail extends Component {
         this.props.navigation.state.params.event.YYYYMMDD +
         ' ' +
         this.props.navigation.state.params.event.altName,
-      value: 0
+      value: 0,
     });
     if (
       this.props.navigation.state.params.event.lat !== null &&
@@ -673,7 +671,7 @@ class EventDetail extends Component {
         this.props.navigation.state.params.event.YYYYMMDD +
         ' ' +
         this.props.navigation.state.params.event.altName,
-      value: 0
+      value: 0,
     });
     switch (targetType) {
       case 'music':
