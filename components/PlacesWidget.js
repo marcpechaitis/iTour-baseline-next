@@ -6,11 +6,10 @@ import {
   Alert,
   Dimensions,
   Image,
-  Modal,
   ScrollView,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from 'react-native';
 import colors from '../helpers/colors';
 import styles from '../helpers/styles';
@@ -34,7 +33,6 @@ class PlacesWidget extends Component {
       isError: false,
       placeURL: '',
       placePhotoReference: '',
-      modalVisible: false
     };
   }
 
@@ -43,7 +41,7 @@ class PlacesWidget extends Component {
   }
 
   componentDidMount() {
-    //    console.log('PlacesWidget componentDidMount');
+    console.log('PlacesWidget componentDidMount');
     if (this.props.event.lat !== null && this.props.event.lat !== null) {
       this.fetchData();
     } else {
@@ -69,44 +67,47 @@ class PlacesWidget extends Component {
 
     try {
       let response = await fetch(GOOGLE_PLACE_API_URL);
+      // console.log('PLACE: ' + GOOGLE_PLACE_API_URL);
+      // console.log('Places response: ' + JSON.stringify(response));
+      // console.log('Places response status: ' + response.status);
 
       if (response.status === 200) {
         let responsePlaces = await response.json();
+        console.log('Places response: ' + responsePlaces.status);
         if (responsePlaces.status === 'OK') {
           if (typeof responsePlaces.results[0].photos !== 'undefined') {
             this.setState({
               isLoading: false,
               placePhotoReference:
-                responsePlaces.results[0].photos[0].photo_reference
+                responsePlaces.results[0].photos[0].photo_reference,
             });
           }
         } else {
           this.setState({
             isLoading: false,
-            isError: true
+            isError: true,
           });
+          console.log('bingo 2');
         }
       } else {
         this.setState({
-          isLoading: false
+          isLoading: false,
+          isError: true,
         });
+        console.log('bingo 3');
       }
     } catch (error) {
       console.log(error.message);
       GoogleAnalytics.trackException(error.message, false);
       this.setState({
         isLoading: false,
-        isError: true
+        isError: true,
       });
     }
   }
 
   componentWillUnmount() {
     //    console.log('PlacesWidget componentWillUnmount');
-  }
-
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
   }
 
   render() {
@@ -125,86 +126,19 @@ class PlacesWidget extends Component {
           PLACE_PHOTO_URL + '&photoreference=' + this.state.placePhotoReference;
         PLACE_PHOTO_URL =
           PLACE_PHOTO_URL + '&key=' + Config.GOOGLE_PLACES_API_KEY;
+
         const resizeMode = 'cover';
         return (
-          // <View>
-          //   <TouchableHighlight
-          //     onPress={() => {
-          //       this.setModalVisible(true);
-          //       GoogleAnalytics.trackEvent('PlacesPhoto', 'venue', {
-          //         label:
-          //           this.props.event.YYYYMMDD + ' ' + this.props.event.altName,
-          //         value: 0
-          //       });
-          //     }}
-          //   >
-          //     <View>
           <View>
             <Image
               style={{ resizeMode, position: 'relative' }}
               source={{
                 uri: PLACE_PHOTO_URL,
                 width: width,
-                height: 32 * vh
+                height: 32 * vh,
               }}
             />
-            {/* <View
-              style={{
-                position: 'absolute',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: width,
-                height: 32 * vh
-              }}
-            >
-              <Text
-                style={{
-                  color: 'white',
-                  backgroundColor: colors.PRIMARY_BG_COLOR,
-                  textAlign: 'center',
-                  fontSize: 30
-                  // alignContent: 'center'
-                  // padding: 40
-                  // top: 300
-                }}
-              >
-                BINGO
-              </Text>
-            </View> */}
           </View>
-
-          //     </View>
-          //   </TouchableHighlight>
-          //   <View>
-          //     <Modal
-          //       animationType={'slide'}
-          //       transparent={false}
-          //       visible={this.state.modalVisible}
-          //       onRequestClose={() => {
-          //         this.setModalVisible(!this.state.modalVisible);
-          //       }}
-          //     >
-          //       <TouchableHighlight
-          //         onPress={() => {
-          //           this.setModalVisible(!this.state.modalVisible);
-          //         }}
-          //       >
-          //         <View style={styles.placePictureModal}>
-          //           <Image
-          //             source={{
-          //               uri: PLACE_PHOTO_URL,
-          //               width: Math.round(90 * vw),
-          //               height: Math.round(60 * vw)
-          //               //   height: 100 * vh,
-          //               //   width: 100 * vw
-          //             }}
-          //           />
-          //         </View>
-          //       </TouchableHighlight>
-          //     </Modal>
-          //   </View>
-          // </View>
         );
       } else {
         return;

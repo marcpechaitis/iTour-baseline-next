@@ -60,6 +60,7 @@ class EventDetail extends Component {
       userPosition: null,
       isFindingUser: false,
       IphoneXBottomOffset: IphoneXBottomOffset,
+      showVenueDetails: true,
     };
   }
 
@@ -77,9 +78,9 @@ class EventDetail extends Component {
     };
     this.props.navigation.setParams(params);
     GoogleAnalytics.trackScreenView(event.YYYYMMDD + ' ' + event.altName);
-    console.log(event.YYYYMMDD);
+    console.log('bingo');
     // TODO decide how to handle!
-    this.getEventLocation();
+    // this.getEventLocation();
   }
 
   getEventLocation() {
@@ -108,6 +109,7 @@ class EventDetail extends Component {
   }
 
   async fetchGeocode() {
+    console.log('fetching Geocode');
     let GEOCODE_URL =
       'https://maps.googleapis.com/maps/api/geocode/json?address=';
     GEOCODE_URL =
@@ -226,9 +228,6 @@ class EventDetail extends Component {
   }
 
   render() {
-    //  event = this.props.navigation.state.params.event;
-    // event = this.props.navigation.state.params.event;
-    console.log('BEFORE LAT/LNG: ' + event.lat + ' ' + event.lng);
     if (this.state.isLoadingGeocodeData) {
       return this.renderLoadingView();
     } else {
@@ -254,134 +253,151 @@ class EventDetail extends Component {
         <View>
           {/* <View style={[styles.headerContainer]} /> */}
           <View style={[styles.contentContainer]}>
-            <View style={[styles.infoContainer, styles.eventInfoContainer]}>
-              <PlacesWidget event={this.state.theEvent} />
-              <View
-                style={{
-                  position: 'absolute',
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: width,
-                  height: 32 * vh,
-                }}
-              >
-                <TouchableHighlight
-                  onPress={() => this.getURLAndCallWebBrowser('venue')}
-                  underlayColor={colors.PRIMARY_COLOR}
-                >
-                  <View>
-                    <Text
-                      style={[
-                        styles.appTextColor,
-                        styles.altName,
-                        styles.overlayText,
-                      ]}
-                    >
-                      {altName}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
+            <TouchableHighlight
+              onPress={() =>
+                this.setState({
+                  showVenueDetails:
+                    this.state.showVenueDetails == true ? false : true,
+                })
+              }
+              // underlayColor={colors.PRIMARY_COLOR}
+            >
+              <View style={[styles.infoContainer, styles.eventInfoContainer]}>
+                <PlacesWidget event={this.state.theEvent} />
                 {(() => {
-                  if (notes) {
+                  if (this.state.showVenueDetails) {
                     return (
-                      <Text
-                        style={[
-                          styles.appTextColor,
-                          styles.notes,
-                          styles.overlayText,
-                        ]}
+                      <View
+                        style={{
+                          position: 'absolute',
+                          flex: 1,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: width,
+                          height: 32 * vh,
+                        }}
                       >
-                        {notes}
-                      </Text>
-                    );
-                  }
-                })()}
-                <Text
-                  style={[
-                    styles.appTextColor,
-                    styles.eventTimes,
-                    styles.overlayText,
-                  ]}
-                >
-                  {eventTimes}
-                </Text>
-                <View style={styles.locationContainerDetail}>
-                  <TouchableHighlight
-                    onPress={() => this.getDirectionsViaMapsApp()}
-                    underlayColor={colors.PRIMARY_COLOR}
-                  >
-                    <View>
-                      <Text
-                        style={[
-                          styles.appTextColor,
-                          styles.venueDetail,
-                          styles.overlayText,
-                        ]}
-                      >
-                        {venue}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.appTextColor,
-                          styles.address,
-                          styles.overlayText,
-                        ]}
-                      >
-                        {address}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.appTextColor,
-                          styles.address,
-                          styles.overlayText,
-                        ]}
-                      >
-                        {cityStatePostal}
-                      </Text>
-                      {(() => {
-                        if (country !== 'USA') {
-                          return (
-                            <Text
-                              style={[
-                                styles.appTextColor,
-                                styles.address,
-                                styles.overlayText,
-                              ]}
-                            >
-                              {country}
-                            </Text>
-                          );
-                        }
-                      })()}
-                    </View>
-                  </TouchableHighlight>
-                  {(() => {
-                    if (phone !== '') {
-                      return (
                         <TouchableHighlight
-                          onPress={() => this.makePhoneCall(phoneToCall)}
+                          onPress={() => this.getURLAndCallWebBrowser('venue')}
                           underlayColor={colors.PRIMARY_COLOR}
                         >
                           <View>
                             <Text
                               style={[
                                 styles.appTextColor,
-                                styles.phone,
+                                styles.altName,
                                 styles.overlayText,
                               ]}
                             >
-                              {phone}
+                              {altName}
                             </Text>
                           </View>
                         </TouchableHighlight>
-                      );
-                    }
-                  })()}
-                </View>
+                        {(() => {
+                          if (notes) {
+                            return (
+                              <Text
+                                style={[
+                                  styles.appTextColor,
+                                  styles.notes,
+                                  styles.overlayText,
+                                ]}
+                              >
+                                {notes}
+                              </Text>
+                            );
+                          }
+                        })()}
+                        <Text
+                          style={[
+                            styles.appTextColor,
+                            styles.eventTimes,
+                            styles.overlayText,
+                          ]}
+                        >
+                          {eventTimes}
+                        </Text>
+                        <View style={styles.locationContainerDetail}>
+                          <TouchableHighlight
+                            onPress={() => this.getDirectionsViaMapsApp()}
+                            underlayColor={colors.PRIMARY_COLOR}
+                          >
+                            <View>
+                              <Text
+                                style={[
+                                  styles.appTextColor,
+                                  styles.venueDetail,
+                                  styles.overlayText,
+                                ]}
+                              >
+                                {venue}
+                              </Text>
+                              <Text
+                                style={[
+                                  styles.appTextColor,
+                                  styles.address,
+                                  styles.overlayText,
+                                ]}
+                              >
+                                {address}
+                              </Text>
+                              <Text
+                                style={[
+                                  styles.appTextColor,
+                                  styles.address,
+                                  styles.overlayText,
+                                ]}
+                              >
+                                {cityStatePostal}
+                              </Text>
+                              {(() => {
+                                if (country !== 'USA') {
+                                  return (
+                                    <Text
+                                      style={[
+                                        styles.appTextColor,
+                                        styles.address,
+                                        styles.overlayText,
+                                      ]}
+                                    >
+                                      {country}
+                                    </Text>
+                                  );
+                                }
+                              })()}
+                            </View>
+                          </TouchableHighlight>
+                          {(() => {
+                            if (phone !== '') {
+                              return (
+                                <TouchableHighlight
+                                  onPress={() =>
+                                    this.makePhoneCall(phoneToCall)
+                                  }
+                                  underlayColor={colors.PRIMARY_COLOR}
+                                >
+                                  <View>
+                                    <Text
+                                      style={[
+                                        styles.appTextColor,
+                                        styles.phone,
+                                        styles.overlayText,
+                                      ]}
+                                    >
+                                      {phone}
+                                    </Text>
+                                  </View>
+                                </TouchableHighlight>
+                              );
+                            }
+                          })()}
+                        </View>
+                      </View>
+                    );
+                  }
+                })()}
               </View>
-              {/* </PlacesWidget> */}
-            </View>
+            </TouchableHighlight>
 
             <View style={[styles.infoContainer, styles.extraInfoContainer]}>
               {(() => {

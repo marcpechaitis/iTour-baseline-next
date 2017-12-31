@@ -14,7 +14,7 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 // import { Actions } from 'react-native-router-flux';
 import Config from 'react-native-config';
@@ -216,7 +216,7 @@ class EventList extends Component {
       //   rowHasChanged: (row1, row2) => row1 !== row2
       // }),
       userPosition: null,
-      isLocationError: false
+      isLocationError: false,
     };
   }
 
@@ -241,7 +241,7 @@ class EventList extends Component {
   }
 
   componentDidMount() {
-    //    console.log('EventList componentDidMount');
+       console.log('EventList componentDidMount');
     SplashScreen.hide();
     //    this.nagTheFreeAppUser();
     this.fetchData();
@@ -305,7 +305,7 @@ class EventList extends Component {
 
     try {
       let response = await fetch(REQUEST_URL);
-
+      console.log('EventList response: ' + response.status);
       if (response.status === 200) {
         // let responseData = await response.json();
         responseData = await response.json();
@@ -325,7 +325,7 @@ class EventList extends Component {
           //        dataSource: this.state.dataSource.cloneWithRows(responseData),
           isLoading: false,
           isRefreshing: false,
-          isError: false
+          isError: false,
         });
       } else {
         // get dataSource stored on the device
@@ -340,7 +340,7 @@ class EventList extends Component {
                 ),
                 isLoading: false,
                 isRefreshing: false,
-                isError: false
+                isError: false,
               });
             }
           );
@@ -349,7 +349,7 @@ class EventList extends Component {
           this.setState({
             isLoading: false,
             isRefreshing: false,
-            isError: true
+            isError: true,
           });
         }
       }
@@ -389,8 +389,8 @@ class EventList extends Component {
           { text: 'Later', onPress: () => null },
           {
             text: 'Get ' + AppNameFullVersion,
-            onPress: () => this.upgradeFromFreeApp()
-          }
+            onPress: () => this.upgradeFromFreeApp(),
+          },
         ]
       );
     }
@@ -399,7 +399,7 @@ class EventList extends Component {
   upgradeFromFreeApp() {
     GoogleAnalytics.trackEvent('Upgrade', params.APP_NAME, {
       label: params.APP_NAME,
-      value: 0
+      value: 0,
     });
     Linking.canOpenURL(params.UPGRADE_URL)
       .then(supported => {
@@ -572,7 +572,7 @@ class EventList extends Component {
               colors={[
                 colors.SPINNER_COLOR,
                 colors.SPINNER_COLOR,
-                colors.SPINNER_COLOR
+                colors.SPINNER_COLOR,
               ]}
               progressBackgroundColor={colors.SECONDARY_BG_COLOR}
               backgroundColor={colors.SECONDARY_BG_COLOR}

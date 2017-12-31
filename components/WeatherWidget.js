@@ -235,7 +235,7 @@ class WeatherWidget extends Component {
   getTemperatureColor(temperature) {
     if (this.state.weatherCurrentData.flags.units != 'us') {
       temperature = temperature * 1.8 + 32;
-      console.log('temp: ' + temperature);
+      // console.log('temp: ' + temperature);
     }
 
     switch (true) {

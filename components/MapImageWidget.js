@@ -52,6 +52,10 @@ class MapImageWidget extends Component {
     //    console.log('MapImageWidget componentWillUnmount');
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   openMapAtEventLocation() {
     GoogleAnalytics.trackEvent('Map', 'venue', {
       label: event.YYYYMMDD + ' ' + event.altName,
@@ -112,6 +116,9 @@ class MapImageWidget extends Component {
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}
+          mapType="standard"
+          showsUserLocation={true}
+          showsTraffic={true}
         >
           <MapView.Marker
             coordinate={{
