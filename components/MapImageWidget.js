@@ -118,7 +118,7 @@ class MapImageWidget extends Component {
           }}
           mapType="standard"
           showsUserLocation={true}
-          showsTraffic={true}
+          // showsTraffic={true}
         >
           <MapView.Marker
             coordinate={{

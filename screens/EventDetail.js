@@ -448,9 +448,9 @@ class EventDetail extends Component {
             > */}
             <View style={[styles.infoContainer, styles.mapInfoContainer]}>
               <MapImageWidget event={this.state.theEvent} />
-              <View
+              {/* <View
                 style={[styles.infoContainer, styles.placePictureInfoContainer]}
-              />
+              /> */}
             </View>
             {/* </TouchableHighlight> */}
             <ActionButton

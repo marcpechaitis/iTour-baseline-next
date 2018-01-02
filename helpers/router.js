@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Platform, Text, TouchableOpacity } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 //import { Icon } from 'react-native-elements';
 

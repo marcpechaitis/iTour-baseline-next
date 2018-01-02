@@ -241,7 +241,7 @@ class EventList extends Component {
   }
 
   componentDidMount() {
-       console.log('EventList componentDidMount');
+    console.log('EventList componentDidMount');
     SplashScreen.hide();
     //    this.nagTheFreeAppUser();
     this.fetchData();
@@ -457,81 +457,81 @@ class EventList extends Component {
     this.props.navigation.navigate('EventDetail', { event: event });
   }
 
-  renderEvent(event) {
-    // Assign Date and Time variables to properties of the event
-    const tzShow = timezone.tz(event.dateShow, event.timeZone);
-    const dateString = tzShow.month() + 1 + '/' + tzShow.date();
+  // renderEvent(event) {
+  //   // Assign Date and Time variables to properties of the event
+  //   const tzShow = timezone.tz(event.dateShow, event.timeZone);
+  //   const dateString = tzShow.month() + 1 + '/' + tzShow.date();
 
-    let city =
-      typeof event.city !== 'undefined' && event.city !== ''
-        ? event.city + ', '
-        : '';
+  //   let city =
+  //     typeof event.city !== 'undefined' && event.city !== ''
+  //       ? event.city + ', '
+  //       : '';
 
-    let country = event.country;
-    let aSpace = ' ';
+  //   let country = event.country;
+  //   let aSpace = ' ';
 
-    return (
-      <TouchableHighlight
-        onPress={() => this.showEventDetail(event)}
-        underlayColor={colors.SPINNER_COLOR}
-      >
-        <View style={styles.listContentContainer}>
-          <View style={styles.rowContainer}>
-            <View style={styles.theRow1}>
-              <View style={styles.venueContainer}>
-                <Text style={styles.venue}>{event.venue}</Text>
-              </View>
-            </View>
-            <View style={styles.theRow2}>
-              <Text style={styles.date}>{dateString}</Text>
-              <View style={styles.detailsContainer}>
-                <View style={styles.locationContainer}>
-                  <Text
-                    style={styles.street}
-                    ellipsizeMode="middle"
-                    numberOfLines={1}
-                  >
-                    {event.address}
-                  </Text>
-                  {(() => {
-                    if (country !== 'USA') {
-                      return (
-                        <Text
-                          style={styles.cityState}
-                          ellipsizeMode="middle"
-                          numberOfLines={1}
-                        >
-                          {city}
-                          {event.state}
-                          {aSpace}
-                          {event.country}
-                        </Text>
-                      );
-                    }
-                  })()}
-                  {(() => {
-                    if (country === 'USA') {
-                      return (
-                        <Text
-                          style={styles.cityState}
-                          ellipsizeMode="middle"
-                          numberOfLines={1}
-                        >
-                          {city}
-                          {event.state}
-                        </Text>
-                      );
-                    }
-                  })()}
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.separator} />
-        </View>
-      </TouchableHighlight>
-    );
-  }
+  //   return (
+  //     <TouchableHighlight
+  //       onPress={() => this.showEventDetail(event)}
+  //       underlayColor={colors.SPINNER_COLOR}
+  //     >
+  //       <View style={styles.listContentContainer}>
+  //         <View style={styles.rowContainer}>
+  //           <View style={styles.theRow1}>
+  //             <View style={styles.venueContainer}>
+  //               <Text style={styles.venue}>{event.venue}</Text>
+  //             </View>
+  //           </View>
+  //           <View style={styles.theRow2}>
+  //             <Text style={styles.date}>{dateString}</Text>
+  //             <View style={styles.detailsContainer}>
+  //               <View style={styles.locationContainer}>
+  //                 <Text
+  //                   style={styles.street}
+  //                   ellipsizeMode="middle"
+  //                   numberOfLines={1}
+  //                 >
+  //                   {event.address}
+  //                 </Text>
+  //                 {(() => {
+  //                   if (country !== 'USA') {
+  //                     return (
+  //                       <Text
+  //                         style={styles.cityState}
+  //                         ellipsizeMode="middle"
+  //                         numberOfLines={1}
+  //                       >
+  //                         {city}
+  //                         {event.state}
+  //                         {aSpace}
+  //                         {event.country}
+  //                       </Text>
+  //                     );
+  //                   }
+  //                 })()}
+  //                 {(() => {
+  //                   if (country === 'USA') {
+  //                     return (
+  //                       <Text
+  //                         style={styles.cityState}
+  //                         ellipsizeMode="middle"
+  //                         numberOfLines={1}
+  //                       >
+  //                         {city}
+  //                         {event.state}
+  //                       </Text>
+  //                     );
+  //                   }
+  //                 })()}
+  //               </View>
+  //             </View>
+  //           </View>
+  //         </View>
+  //         <View style={styles.separator} />
+  //       </View>
+  //     </TouchableHighlight>
+  //   );
+  // }
 
   _renderItem = ({ item }) => (
     <MyListItem
@@ -555,7 +555,11 @@ class EventList extends Component {
     }
 
     return (
-      <View backgroundColor={colors.SECONDARY_BG_COLOR}>
+      <View
+        style={styles.listView}
+        // backgroundColor={colors.SECONDARY_BG_COLOR}
+        // style={{ paddingTop: 50 }}
+      >
         <FlatList
           data={responseData}
           extraData={this.state}

@@ -129,13 +129,13 @@ class PlacesWidget extends Component {
 
         const resizeMode = 'cover';
         return (
-          <View>
+          <View style={{ marginTop: -2 * vh }}>
             <Image
               style={{ resizeMode, position: 'relative' }}
               source={{
                 uri: PLACE_PHOTO_URL,
                 width: width,
-                height: 32 * vh,
+                height: 34 * vh,
               }}
             />
           </View>

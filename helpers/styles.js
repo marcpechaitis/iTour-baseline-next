@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   /* Event List */
   listContentContainer: {
-    //        paddingTop: 50,
+    //  paddingTop: 2 * vw,
     //        paddingTop: 1*vw,
     //        paddingTop: (Platform.OS === 'ios' ? 64 : 50),
     //        backgroundColor: '#006bb1'
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: colors.SECONDARY_BG_COLOR,
     //   marginTop: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
-    paddingTop: Platform.OS === 'ios' ? 0.5 * vh : 1 * vh,
+    paddingTop: Platform.OS === 'ios' ? 1 * vh : 1 * vh,
   },
   rowContainer: {
     flexDirection: 'column',
