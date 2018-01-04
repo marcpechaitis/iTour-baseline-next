@@ -61,6 +61,7 @@ class EventDetail extends Component {
       isFindingUser: false,
       IphoneXBottomOffset: IphoneXBottomOffset,
       showVenueDetails: true,
+      showsTraffic: true,
     };
   }
 
@@ -447,7 +448,10 @@ class EventDetail extends Component {
               underlayColor={colors.PRIMARY_COLOR}
             > */}
             <View style={[styles.infoContainer, styles.mapInfoContainer]}>
-              <MapImageWidget event={this.state.theEvent} />
+              <MapImageWidget
+                event={this.state.theEvent}
+                showsTraffic={this.state.showsTraffic}
+              />
               {/* <View
                 style={[styles.infoContainer, styles.placePictureInfoContainer]}
               /> */}
@@ -501,6 +505,18 @@ class EventDetail extends Component {
                   name="event-seat"
                   style={styles.actionButtonIcon}
                 />
+              </ActionButton.Item>
+              <ActionButton.Item
+                buttonColor={colors.APP_TEXT_COLOR}
+                title="Traffic"
+                onPress={() =>
+                  this.setState({
+                    showsTraffic:
+                      this.state.showsTraffic == true ? false : true,
+                  })
+                }
+              >
+                <MaterialIcons name="traffic" style={styles.actionButtonIcon} />
               </ActionButton.Item>
               <ActionButton.Item
                 buttonColor={colors.APP_TEXT_COLOR}

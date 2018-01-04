@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   mapInfoContainer: {
     //    flex: 1,
-    height: Platform.OS === 'ios' ? 46 * vh : 42 * vh,
+    height: Platform.OS === 'ios' ? 46 * vh : 43 * vh,
     width: 100 * vw,
     // paddingTop: 1 * vw,
     // marginTop: Platform.OS === 'ios' ? -1 * vh : 0 * vh,

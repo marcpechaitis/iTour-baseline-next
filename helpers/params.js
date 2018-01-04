@@ -10,14 +10,14 @@ const params = {
   MUSIC_URL2: '&address=',
   MUSIC_URL3: '&region=&country=&radius=60',
   SEATING_TITLE: 'Seating Chart',
-  SETLIST_TITLE: 'Everyday Companion Setlist',
+  SETLIST_TITLE: 'Everyday Companion',
   TICKETS_TITLE: 'CashorTrade Tickets',
   TICKETS_URL: 'http://m.cashortrade.org/widespread-panic-tickets',
   UPGRADE_URL: 'itms://itunes.apple.com/us/app/apple-store/id423268358',
   VIDEO_TITLE: 'YouTube Videos',
   VIDEO_URL: 'https://m.youtube.com/#/results?q=widespread%20panic%20',
   WEATHER_TITLE: 'Dark Sky Weather',
-  WEATHER_URL: 'https://darksky.net/'
+  WEATHER_URL: 'https://darksky.net/',
 };
 
 module.exports = params;

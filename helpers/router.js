@@ -5,10 +5,10 @@ import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import Feed from '../screens/Feed';
-import Settings from '../screens/Settings';
-import UserDetail from '../screens/UserDetail';
-import Me from '../screens/Me';
+// import Feed from '../screens/Feed';
+// import Settings from '../screens/Settings';
+// import UserDetail from '../screens/UserDetail';
+// import Me from '../screens/Me';
 
 import EventDetail from '../screens/EventDetail';
 import EventList from '../screens/EventList';
