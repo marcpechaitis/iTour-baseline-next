@@ -232,7 +232,7 @@ class EventList extends Component {
       state => {
         if (state === 'active') {
           this.determineLocation();
-          this.nagTheFreeAppUser();
+          // this.nagTheFreeAppUser();
         } else {
           this.clearLocation();
         }
@@ -305,7 +305,6 @@ class EventList extends Component {
 
     try {
       let response = await fetch(REQUEST_URL);
-      console.log('EventList response: ' + response.status);
       if (response.status === 200) {
         // let responseData = await response.json();
         responseData = await response.json();
