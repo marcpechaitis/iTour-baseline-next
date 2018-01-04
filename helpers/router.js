@@ -31,7 +31,7 @@ export const MainScreenNavigator = TabNavigator(
         ),
       },
     },
-    Me: {
+    EventMap: {
       screen: EventMap,
       navigationOptions: {
         tabBarLabel: 'Map',
@@ -68,8 +68,6 @@ export const EventStack = StackNavigator(
       screen: MainScreenNavigator,
       navigationOptions: {
         title: params.APP_NAME,
-        subTitle: 'bingo',
-
         headerTintColor: 'white',
         headerStyle: styles.navBar,
         headerTitleStyle: styles.navBarTextStyle,
