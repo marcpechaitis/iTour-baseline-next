@@ -118,6 +118,7 @@ class MapImageWidget extends Component {
             }}
             title={event.venue}
             onCalloutPress={() => this.openMapAtEventLocation()}
+            pinColor={colors.PRIMARY_COLOR}
             // description={'Get Directions'}
           />
         </MapView>
