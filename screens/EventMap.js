@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class EventMap extends Component<{}> {
+export default class EventMap extends React.PureComponent {
   constructor(props) {
     super(props);
     this.map = null;
@@ -103,7 +103,7 @@ export default class EventMap extends Component<{}> {
 
           // for (var showID in responseData)
           //   TOUR_MARKERS.push([showID, responseData[showID]]);
-          TOUR_MARKERS = JSON.parse(responseData);
+          //    TOUR_MARKERS = JSON.parse(responseData);
           console.log(TOUR_MARKERS);
           // this.setState({ isLoading: false });
         }
