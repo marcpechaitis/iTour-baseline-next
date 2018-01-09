@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
+import colors from '../helpers/colors';
+import params from '../helpers/params';
 
 const { width, height, scale } = Dimensions.get('window'),
   vw = width / 100,
@@ -146,7 +148,11 @@ export default class EventMap extends Component<{}> {
           }}
         >
           {TOUR_MARKERS.map((marker, i) => (
-            <MapView.Marker key={i} coordinate={marker} />
+            <MapView.Marker
+              key={i}
+              coordinate={marker}
+              pinColor={colors.PRIMARY_COLOR}
+            />
           ))}
         </MapView>
       </View>
