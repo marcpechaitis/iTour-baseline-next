@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import React from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
