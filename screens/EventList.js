@@ -15,6 +15,7 @@ import {
   ListView,
   Platform,
   RefreshControl,
+  StatusBar,
   Text,
   TouchableHighlight,
   TouchableOpacity,
@@ -395,6 +396,13 @@ class EventList extends Component {
         // backgroundColor={colors.SECONDARY_BG_COLOR}
         // style={{ paddingTop: 50 }}
       >
+        <StatusBar
+          backgroundColor={colors.STATUS_BAR_COLOR}
+          // backgroundColor="rgba(0, 0, 0, 0.20)"
+          barStyle="light-content"
+          // translucent={true}
+        />
+
         <FlatList
           data={responseData}
           extraData={this.state}

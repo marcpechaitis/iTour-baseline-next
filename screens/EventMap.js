@@ -63,18 +63,18 @@ let TOUR_MARKERS = [];
 
 const DEFAULT_PADDING = { top: 60, right: 60, bottom: 60, left: 60 };
 
-const stylesMap = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    height: height,
-    width: width,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
+// const stylesMap = StyleSheet.create({
+//   container: {
+//     ...StyleSheet.absoluteFillObject,
+//     height: height,
+//     width: width,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//   },
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
 
 export default class EventMap extends React.PureComponent {
   constructor(props) {
@@ -159,13 +159,13 @@ export default class EventMap extends React.PureComponent {
     //   console.log('MARKERS ' + JSON.stringify(MARKERS));
 
     return (
-      <View style={stylesMap.container}>
+      <View style={styles.mapContainer}>
         <MapView
           showsUserLocation
           ref={ref => {
             this.map = ref;
           }}
-          style={stylesMap.map}
+          style={styles.map}
           // onLayout={() =>
           //   this.map.fitToCoordinates(TOUR_MARKERS, {
           //     edgePadding: { top: 10, right: 10, bottom: 10, left: 10 },

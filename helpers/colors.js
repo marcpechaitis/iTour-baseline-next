@@ -1,3 +1,4 @@
+import Color from 'color';
 import params from './params';
 
 const colors = {
@@ -10,7 +11,8 @@ const colors = {
   MODAL_BACKGROUND: 'rgba(0, 0, 0, 0.75)',
   APP_TEXT_COLOR: '#fff',
   MAP_MARKER_COLOR: '0x' + params.BAND_COLOR,
-  SPINNER_COLOR: '#fff'
+  SPINNER_COLOR: '#fff',
+  STATUS_BAR_COLOR: Color('#' + params.BAND_COLOR).darken(0.2),
 };
 
 // DEAD #FF0000

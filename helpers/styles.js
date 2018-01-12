@@ -198,6 +198,20 @@ const styles = StyleSheet.create({
   separator: {
     backgroundColor: colors.SECONDARY_BG_COLOR,
   },
+  /* Event Map */
+  mapContainer: {
+    ...StyleSheet.absoluteFillObject,
+    // height: height,
+    height: height - 128,
+    width: width,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+    // marginBottom: 200,
+    // height: 200,
+  },
   /* Event Detail */
   contentContainer: {
     //    paddingTop: 1*vw + 64,
