@@ -59,7 +59,9 @@ export const MainScreenNavigator = TabNavigator(
       showLabel: false,
       // tabStyle: { padding: 0 },
       allowFontScaling: false,
+      pressColor: colors.APP_TEXT_COLOR,
     },
+    animationEnabled: true,
     //   tabBarComponent: TabBarBottom,
     //   tabBarPosition: 'bottom'
   }
