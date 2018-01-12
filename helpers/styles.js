@@ -202,7 +202,8 @@ const styles = StyleSheet.create({
   mapContainer: {
     ...StyleSheet.absoluteFillObject,
     // height: height,
-    height: height - 128,
+    // height: height - 128,
+    height: Platform.OS === 'ios' ? height - 172 : height - 128,
     width: width,
     justifyContent: 'flex-end',
     alignItems: 'center',
