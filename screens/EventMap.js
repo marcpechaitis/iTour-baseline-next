@@ -114,7 +114,9 @@ export default class EventMap extends React.PureComponent {
           //   TOUR_MARKERS.push([showID, responseData[showID]]);
 
           // TOUR_MARKERS = JSON.parse(responseData);
-          TOUR_MARKERS = this.removeDupes(JSON.parse(responseData));
+          if (responseData != null) {
+            TOUR_MARKERS = this.removeDupes(JSON.parse(responseData));
+          }
           console.log(TOUR_MARKERS);
           this.setState({ isLoading: false });
         }
@@ -206,7 +208,7 @@ export default class EventMap extends React.PureComponent {
                 });
                 this['callout-' + i].setNativeProps({ zIndex: 9999 });
               }}
-              title={event.showID + ' ' + event.venue}
+              title={event.venue}
               coordinate={{
                 latitude: parseFloat(event.lat),
                 longitude: parseFloat(event.lng),

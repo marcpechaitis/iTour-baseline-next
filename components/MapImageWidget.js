@@ -28,11 +28,11 @@ const { width, height, scale } = Dimensions.get('window'),
   vmin = Math.min(vw, vh),
   vmax = Math.max(vw, vh);
 
-const mapStyles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-});
+// const mapStyles = StyleSheet.create({
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
 
 class MapImageWidget extends Component {
   constructor(props) {
@@ -100,7 +100,7 @@ class MapImageWidget extends Component {
     ) {
       return (
         <MapView
-          style={mapStyles.map}
+          style={styles.map}
           region={{
             latitude: parseFloat(event.lat),
             longitude: parseFloat(event.lng),

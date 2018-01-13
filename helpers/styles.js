@@ -10,14 +10,24 @@ const { width, height, scale } = Dimensions.get('window'),
   vh = height / 100,
   vmin = Math.min(vw, vh),
   vmax = Math.max(vw, vh);
+console.log('height ' + height);
+const androidEventDetailMapHeight = isPixelXL() ? 45 * vh : 43 * vh;
 const iPhoneNavBarHeight = isIphoneX() ? 88 : 64;
 const iPhonePaddingTop = isIphoneX() ? 24 : 0;
-function isIphoneX() {
-  if (Platform.OS === 'ios' && height === 812) {
-    console.log('iPhone X');
+const iPhoneMapMarginBottom = isIphoneX() ? 172 : 112;
+
+function isPixelXL() {
+  if (Platform.OS === 'android' && height > 774) {
     return true;
   } else {
-    console.log('NOT iPhone X');
+    return false;
+  }
+}
+
+function isIphoneX() {
+  if (Platform.OS === 'ios' && height === 812) {
+    return true;
+  } else {
     return false;
   }
 }
@@ -82,25 +92,27 @@ const styles = StyleSheet.create({
     color: colors.APP_TEXT_COLOR,
   },
   /* Event List */
-  listContentContainer: {
-    //  paddingTop: 2 * vw,
-    //        paddingTop: 1*vw,
-    //        paddingTop: (Platform.OS === 'ios' ? 64 : 50),
-    //        backgroundColor: '#006bb1'
-    backgroundColor: colors.SECONDARY_BG_COLOR,
-    //        backgroundColor: colors.SECONDARY_COLOR
-    //        backgroundColor: randomColor()
-    //        shadowColor: colors.PRIMARY_BG_COLOR
-  },
   listView: {
     // flex: 1,
     backgroundColor: colors.SECONDARY_BG_COLOR,
     //   marginTop: Platform.OS === 'ios' ? iPhoneNavBarHeight : 54,
     paddingTop: Platform.OS === 'ios' ? 1 * vh : 1 * vh,
   },
+  listContentContainer: {
+    //  paddingTop: 2 * vw,
+    //        paddingTop: 1*vw,
+    //        paddingTop: (Platform.OS === 'ios' ? 64 : 50),
+    //        backgroundColor: '#006bb1'
+    backgroundColor: colors.SECONDARY_BG_COLOR,
+    width: 100 * vw,
+    //        backgroundColor: colors.SECONDARY_COLOR
+    //        backgroundColor: randomColor()
+    //        shadowColor: colors.PRIMARY_BG_COLOR
+  },
+
   rowContainer: {
     flexDirection: 'column',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     // flex: 1,
     width: 96 * vw,
     marginTop: 1 * vw,
@@ -130,18 +142,18 @@ const styles = StyleSheet.create({
     //        }
   },
   theRow1: {
-    //        backgroundColor: 'black',
+    // backgroundColor: 'green',
     //        width: Dimensions.get('window').width
     width: 92 * vw,
-    //    flex:1
+    // flex: 1,
   },
   theRow2: {
     flexDirection: 'row',
-    //        backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
     alignItems: 'center',
     //        width: Dimensions.get('window').width
     width: 92 * vw,
-    // flex: 1
+    // flex: 1,
   },
   venueContainer: {
     flexWrap: 'wrap',
@@ -203,7 +215,8 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     // height: height,
     // height: height - 128,
-    height: Platform.OS === 'ios' ? height - 172 : height - 128,
+    height:
+      Platform.OS === 'ios' ? height - iPhoneMapMarginBottom : height - 128,
     width: width,
     justifyContent: 'flex-end',
     alignItems: 'center',
@@ -269,7 +282,7 @@ const styles = StyleSheet.create({
   },
   mapInfoContainer: {
     //    flex: 1,
-    height: Platform.OS === 'ios' ? 46 * vh : 43 * vh,
+    height: Platform.OS === 'ios' ? 46 * vh : androidEventDetailMapHeight,
     width: 100 * vw,
     // paddingTop: 1 * vw,
     // marginTop: Platform.OS === 'ios' ? -1 * vh : 0 * vh,
