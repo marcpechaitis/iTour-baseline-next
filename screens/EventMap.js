@@ -117,7 +117,7 @@ export default class EventMap extends React.PureComponent {
           if (responseData != null) {
             TOUR_MARKERS = this.removeDupes(JSON.parse(responseData));
           }
-          console.log(TOUR_MARKERS);
+          console.log(JSON.stringify(TOUR_MARKERS));
           this.setState({ isLoading: false });
         }
       );
@@ -159,7 +159,8 @@ export default class EventMap extends React.PureComponent {
     }
     // console.log('MARKERS ' + JSON.stringify(TOUR_MARKERS));
     //   console.log('MARKERS ' + JSON.stringify(MARKERS));
-
+    console.log('SCREEN PROPS MAP ' + JSON.stringify(this.props.screenProps));
+    //  TOUR_MARKERS = this.props.screenProps.bingo;
     return (
       <View style={styles.mapContainer}>
         <MapView

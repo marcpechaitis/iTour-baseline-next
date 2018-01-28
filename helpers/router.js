@@ -23,10 +23,38 @@ import { showWebBrowser } from '../helpers/common';
 import params from '../helpers/params';
 import styles from '../helpers/styles';
 
+console.log('yoyo');
+//let  bingo = { foo: 'baro' };
+let bingo = [
+  {
+    showID: 23,
+    dateShow: '2017-12-29T20:00:00',
+    dateDoors: '2017-12-29T19:00:00',
+    dateLots: '',
+    timeZone: 'America/New_York',
+    venue: 'Fox Theatre',
+    altName: 'Atlanta',
+    notes: 'Capacity: 4,678',
+    address: '660 Peachtree St NE',
+    city: 'Atlanta',
+    state: 'GA',
+    postal: '30308',
+    country: 'USA',
+    phoneNbr: '404-881-2100',
+    venueURL: 'http://foxtheatre.org/',
+    setlistURL: 'http://www.everydaycompanion.com/setlists/20171229a.asp',
+    seatingURL:
+      'http://s1.ticketm.net/tm/en-us/tmimages/venue/maps/atl/3732s.gif',
+    lat: '33.7725845',
+    lng: '-84.3856028',
+    confidence: '1',
+  },
+];
 export const MainScreenNavigator = TabNavigator(
   {
     EventList: {
-      screen: EventList,
+      //      screen: EventList,
+      screen: ({ screenProps }) => <EventList screenProps={{ bingo }} />,
       navigationOptions: {
         tabBarLabel: 'List',
         tabBarIcon: ({ tintColor }) => (
@@ -35,7 +63,7 @@ export const MainScreenNavigator = TabNavigator(
       },
     },
     EventMap: {
-      screen: EventMap,
+      screen: ({ screenProps }) => <EventMap screenProps={{ bingo }} />,
       navigationOptions: {
         tabBarLabel: 'Map',
         tabBarIcon: ({ tintColor }) => (

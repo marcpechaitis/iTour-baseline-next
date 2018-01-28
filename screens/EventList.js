@@ -389,7 +389,9 @@ class EventList extends Component {
     if (this.state.isError) {
       return this.renderLoadingError();
     }
-
+    console.log(
+      'SCREEN PROPS LIST ' + JSON.stringify(this.props.screenProps.bingo)
+    );
     return (
       <View
         style={styles.listView}
@@ -405,6 +407,7 @@ class EventList extends Component {
 
         <FlatList
           data={responseData}
+          // data={this.props.screenProps.bingo}
           extraData={this.state}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
